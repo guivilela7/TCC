@@ -1,0 +1,56 @@
+\chapter{Fundamentação teórica}
+
+Ao longo deste capitulo será descrito topicos importantes para o entendimento deste trabalho.
+Os conceitos apresentados serão: (i) características de qualidade em código, (ii) cobertura de testes, (iii) complexidade ciclomática,
+(iv) complexidade cognitiva, (v) análise estática e (vi) a ferramenta SonarQube, que foi utilizada no processo de avaliação.
+
+\section{Características de qualidade em código}
+
+De acordo com a ISO/IEC 9126, a qualidade de software pode ser avaliada com base em características como
+funcionalidade, confiabilidade, usabilidade, eficiência, manutenibilidade e portabilidade. Todos esses atributos tornam um codigo
+mais agradáveis para desenvolvedores e usuários, além de menos propenso a falhas.
+
+Dentro desses podemos entrar ainda mais a fundo em cada um 
+
+Apresentar os atributos que tornam um código mais legível, manutenível,
+consistente e menos propenso a falhas. Nesta seção, também devem ser
+abordadas métricas que ajudam a observar a qualidade do código de forma
+objetiva.
+
+\subsection{Cobertura de testes}
+
+A cobertura de testes indica a proporção do código exercitada pelos testes
+automatizados. Ela não garante ausência de defeitos, mas ajuda a identificar
+partes pouco verificadas e a orientar a ampliação da suíte de testes.
+
+\subsection{Complexidade ciclomática}
+
+McCABE (1976) desenvolveu uma métrica para medir a complexidade de módulos,
+ou seja, unidades de código fonte de software. Tal métrica foi nomeada complexidade
+ciclomática e é amplamente utilizada, de acordo com MICHURA e CAPRETZ (2005). Uma
+alta complexidade ciclomática significa que determinada unidade de software é difícil de se
+entender e dar manutenção. A métrica é baseada no conceito de caminhos que um código
+fonte pode seguir. Quanto mais caminhos existirem, maior é a dificuldade de um
+desenvolvedor conseguir abstrair a execução em seu pensamento.
+
+A complexidade ciclomática mede o número de caminhos independentes em um
+módulo. Valores elevados tendem a indicar trechos com maior dificuldade de
+compreensão, manutenção e teste.
+
+\subsection{Complexidade cognitiva}
+
+A complexidade cognitiva procura refletir o esforço mental necessário para
+entender um trecho de código. Diferente de outras métricas estruturais, ela
+valoriza a legibilidade e a simplicidade da lógica implementada.
+
+\section{Análise estática}
+
+Explicar o papel da análise estática na identificação de problemas sem
+executar o software, destacando ganhos de confiabilidade e produtividade.
+
+\section{SonarQube}
+
+Descrever a ferramenta SonarQube, suas métricas, regras e como ela pode ser
+usada para apoiar a avaliação da qualidade do código, especialmente na
+verificação de cobertura de testes, complexidade ciclomática e complexidade
+cognitiva.
