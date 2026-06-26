@@ -1,56 +1,96 @@
 \chapter{Fundamentação teórica}
 
 Ao longo deste capitulo será descrito topicos importantes para o entendimento deste trabalho.
-Os conceitos apresentados serão: (i) características de qualidade em código, (ii) cobertura de testes, (iii) complexidade ciclomática,
-(iv) complexidade cognitiva, (v) análise estática e (vi) a ferramenta SonarQube, que foi utilizada no processo de avaliação.
+Os conceitos apresentados serão: (i) características de qualidade em código, (ii) testes de software, (iii) cobertura de testes,
+(iv) análise estática e (v) a ferramenta SonarQube, que foi utilizada no processo de avaliação.
 
 \section{Características de qualidade em código}
 
 De acordo com a ISO/IEC 9126, a qualidade de software pode ser avaliada com base em características como
-funcionalidade, confiabilidade, usabilidade, eficiência, manutenibilidade e portabilidade. Todos esses atributos tornam um codigo
-mais agradáveis para desenvolvedores e usuários, além de menos propenso a falhas.
+funcionalidade, confiabilidade, usabilidade, eficiência, manutenibilidade e portabilidade. Portanto podemos concluir que
+a qualidade de software não é unilateral e varia de ponto de vista de acordo com o contexto em que o software é utilizado.
+Segundo McConnell \cite{mcconnell2004code}, a qualidade de código pode ser dividida em duas categorias, a Qualidade Externa e a Qualidade Interna.
 
-Dentro desses podemos entrar ainda mais a fundo em cada um 
+Qualidade Externa trata da percepção do usuário final sobre o software, ela vem de uma visão de fora sem conhecimento de código fonte.
+Esse tipo de qualidade é medida por meio de testes de aceitação, controle de qualidade e comentários dos usuários.
 
-Apresentar os atributos que tornam um código mais legível, manutenível,
-consistente e menos propenso a falhas. Nesta seção, também devem ser
-abordadas métricas que ajudam a observar a qualidade do código de forma
-objetiva.
+Qualidade Interna se relaciona a percepção do desenvolvedor sobre o software, aquele que tem conhecimento do código fonte
+e vê os elementos que não são aparentes ao usuário. Seus aspectos de qualidade podem ser medidas por métricas de código,
+permitindo um cálculo quantitativo da qualidade do software. Neste trabalho, o foco está na capacidade de verificação do
+código por meio de testes automatizados e de métricas de cobertura.
+
+% Apresentar os atributos que tornam um código mais legível, manutenível,
+% consistente e menos propenso a falhas. Nesta seção, também devem ser
+% abordadas métricas que ajudam a observar a qualidade do código de forma
+% objetiva.
+
+\subsection{Testes de software}
+
+O teste de software tem como intuito executar o programa ou modelo utilizando algumas entradas em particular e verificar se
+seu comportamento está de acordo com o esperado. Caso a execução apresente resultados não especificados, dizemos que um erro ou defeito
+foi identificado. Além disso, os dados de tal execução podem servir como fonte de informação para a localização e a correção de tais defeitos \cite{delamaro2007}.
+
+% Os testes de software têm como objetivo verificar se o sistema atende aos requisitos esperados e se mantém estável diante de
+% alterações. Em ambientes de desenvolvimento contínuo, os testes automatizados ajudam a reduzir regressões e oferecem feedback
+% rápido sobre mudanças no código.
+
+Além de apoiar a detecção de defeitos, uma suíte de testes bem estruturada contribui para a manutenção e evolução do software,
+pois torna mais segura a correção e a inclusão de novas funcionalidades.
 
 \subsection{Cobertura de testes}
 
-A cobertura de testes indica a proporção do código exercitada pelos testes
-automatizados. Ela não garante ausência de defeitos, mas ajuda a identificar
-partes pouco verificadas e a orientar a ampliação da suíte de testes.
+Cobertura de testes é uma métrica que ajuda a definir o número de testes que precisamos escrever para um programa.
+Ela mede o percentual de comandos de um programa que são cobertos por testes \cite{valente2020engenharia}, isto é:
+cobertura de testes = (número de comandos executados pelos testes) / (total de comandos do programa)
 
-\subsection{Complexidade ciclomática}
+Não existe número mágico ideal para a cobertura e tão pouco é esperado que um projeto alcançe 100\% de cobertura.
+De acordo com a literatura \cite{valente2020engenharia}, essa resposta varia de projeto para projeto e depende de vários fatores, como complexidade dos requisitos, criticidade do projeto, etc.
+Ao invés de ter um valor fixo, deve-se monitorar a evolução dos valores de cobertura ao longo do tempo e verificar trexos do código
+não testados e avaliar se são relevantes e também se não possuem uma dificuldade elevada para ser testados.
 
-McCABE (1976) desenvolveu uma métrica para medir a complexidade de módulos,
-ou seja, unidades de código fonte de software. Tal métrica foi nomeada complexidade
-ciclomática e é amplamente utilizada, de acordo com MICHURA e CAPRETZ (2005). Uma
-alta complexidade ciclomática significa que determinada unidade de software é difícil de se
-entender e dar manutenção. A métrica é baseada no conceito de caminhos que um código
-fonte pode seguir. Quanto mais caminhos existirem, maior é a dificuldade de um
-desenvolvedor conseguir abstrair a execução em seu pensamento.
+Dito isso, times que valorizam mais a escrita de código com testes normalmente alcançam algo em torno de 70\% de cobertura \cite{sommerville2011software}.
+Enquanto uma coberura abaixo de 50\% costuma ser preocupante \cite{fowler2012test}.
+E mesmo em projetos que usam de TDD, a cobertura não costuma chegar a 100\%, visto que normalmente fique acima de 90\% \cite{sommerville2011software}.
 
-A complexidade ciclomática mede o número de caminhos independentes em um
-módulo. Valores elevados tendem a indicar trechos com maior dificuldade de
-compreensão, manutenção e teste.
+% A cobertura de testes indica a proporção do código exercitada pelos testes
+% automatizados. Ela não garante ausência de defeitos, mas ajuda a identificar
+% partes pouco verificadas e a orientar a ampliação da suíte de testes.
 
-\subsection{Complexidade cognitiva}
+\subsection{Testes funcionais}
 
-A complexidade cognitiva procura refletir o esforço mental necessário para
-entender um trecho de código. Diferente de outras métricas estruturais, ela
-valoriza a legibilidade e a simplicidade da lógica implementada.
+Teste funcional é uma técnica utilizada para se projetarem casos de teste na qual o programa ou sistema é considerado uma caixa preta e,
+para testa-lo, são fornecidas entradas e avaliadas as saídas geradas para verificar se estão em conformidade com os objetivos especificados. \cite{delamaro2007}
+
+
+
+\subsection{Baixa cobertura e risco de qualidade}
+
+Quando a cobertura está baixa, parte relevante do comportamento da aplicação permanece sem verificação automatizada. Isso
+aumenta o risco de falhas em produção, dificulta a identificação rápida de regressões e reduz a confiança da equipe na evolução
+do sistema.
+
+Por esse motivo, a interpretação da cobertura deve ser feita em conjunto com o contexto do projeto, priorizando áreas críticas
+de negócio e pontos historicamente mais suscetíveis a defeitos.
 
 \section{Análise estática}
 
-Explicar o papel da análise estática na identificação de problemas sem
-executar o software, destacando ganhos de confiabilidade e produtividade.
+A análise estática permite avaliar o código sem executar a aplicação, identificando problemas de qualidade, manutenção e
+confiabilidade de forma antecipada. No contexto deste trabalho, ela atua como apoio ao diagnóstico da cobertura de testes,
+fornecendo indicadores que orientam a priorização de melhorias.
 
 \section{SonarQube}
 
-Descrever a ferramenta SonarQube, suas métricas, regras e como ela pode ser
-usada para apoiar a avaliação da qualidade do código, especialmente na
-verificação de cobertura de testes, complexidade ciclomática e complexidade
-cognitiva.
+O SonarQube é uma plataforma de gerenciamento contínuo da qualidade de código muito utilizada na indústria de software.
+Ele realiza análises de codigo-fonte para identificar problmeas na qualidade do código e oferece medidas para
+segurança, manutenibilidade, confiabilidade, entre outros. A ferramenta também oferece métricas como cobertura de testes,
+complexidade ciclomática, complexidade cognitiva e duplicidade de código. É uma plataforma web robusta com suporte multiliguagem,
+integração com diversas ferramentas de desenvolvimento e versionamento como GitHub, Jenkins e GitLab,
+com capacidade de personalização das regras de análise.
+
+Tudo isso se baseia em sete eixos: Arquitetura e Projeto, Testes, Comentários, Complexidade, Regras de Codificação,
+Erros Potenciais e Duplicidade de Código. Além de integrar outras ferramentas de análise estática para avaliação de código-fonte.
+
+% Descrever a ferramenta SonarQube, suas métricas, regras e como ela pode ser
+% usada para apoiar a avaliação da qualidade do código, especialmente na
+% verificação de cobertura de testes, complexidade ciclomática e complexidade
+% cognitiva.
