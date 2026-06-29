@@ -1,23 +1,35 @@
 \chapter{Fundamentação teórica}
 
-Ao longo deste capitulo será descrito topicos importantes para o entendimento deste trabalho.
+Ao longo deste capitulo será descrito tópicos importantes para o entendimento deste trabalho.
 Os conceitos apresentados serão: (i) características de qualidade em código, (ii) testes de software, (iii) cobertura de testes,
-(iv) análise estática e (v) a ferramenta SonarQube, que foi utilizada no processo de avaliação.
+(iv) análise estática e (v) a ferramenta SonarQube, utilizada no processo de avaliação.
+
+\section{SonarQube}
+
+O SonarQube é uma plataforma de gerenciamento automático da qualidade e análise de segurança de código.
+Ela permite que organizações e indivíduos revisem, monitorem e melhorem a qualidade do código-fonte dos seus projetos,
+identificando problemas como bugs, vulnerabilidades e \textit{code smells}, oferecendo medidas para segurança, manutenibilidade, confiabilidade e outros.
+A ferramenta também oferece métricas como cobertura de testes, complexidade ciclomática, complexidade cognitiva e duplicidade de código.
+É uma plataforma web robusta, com suporte multilíngue integração com diversas ferramentas de desenvolvimento e versionamento como GitHub, Jenkins e GitLab,
+com capacidade de personalização das regras de análise.~\cite{sonarqube}.
+
+Utilizamos a plataforma para gerar um relatório completo do repositório \textit{interface-web} do AgroMart; com ele, podemos explorar as métricas do repositório de forma visual e quantitativa,
+observando quais estão positivas e quais negativas. Assim podemos entender aonde se encontram os problemas do projeto e definimos qual focar.
 
 \section{Características de qualidade em código}
 
-De acordo com a ISO/IEC 9126, a qualidade de software pode ser avaliada com base em características como
-funcionalidade, confiabilidade, usabilidade, eficiência, manutenibilidade e portabilidade. Portanto podemos concluir que
-a qualidade de software não é unilateral e varia de ponto de vista de acordo com o contexto em que o software é utilizado.
-Segundo McConnell \cite{mcconnell2004code}, a qualidade de código pode ser dividida em duas categorias, a Qualidade Externa e a Qualidade Interna.
+De acordo com a ISO/IEC 25010, a qualidade de software pode ser avaliada por meio de características como
+adequação funcional, eficiência de desempenho, compatibilidade, usabilidade, confiabilidade, segurança, manutenibilidade e portabilidade. Portanto podemos concluir que
+a qualidade de software não é unilateral e varia de ponto de vista e de acordo com o contexto em que o software é utilizado.
+Neste trabalho, a característica mais relacionada é a manutenibilidade, pois ela se associa à facilidade de compreender, modificar e testar o código-fonte.~\cite{iso25010}.
 
-Qualidade Externa trata da percepção do usuário final sobre o software, ela vem de uma visão de fora sem conhecimento de código fonte.
+Segundo McConnell, a qualidade de código pode ser dividida em duas categorias: Qualidade Externa e Qualidade Interna.
+Qualidade Externa trata da percepção do usuário final sobre o software, ela vem de uma visão de fora sem conhecimento de código-fonte.
 Esse tipo de qualidade é medida por meio de testes de aceitação, controle de qualidade e comentários dos usuários.
-
-Qualidade Interna se relaciona a percepção do desenvolvedor sobre o software, aquele que tem conhecimento do código fonte
+Qualidade Interna se relaciona a percepção do desenvolvedor sobre o software, aquele que tem conhecimento do código-fonte
 e vê os elementos que não são aparentes ao usuário. Seus aspectos de qualidade podem ser medidas por métricas de código,
 permitindo um cálculo quantitativo da qualidade do software. Neste trabalho, o foco está na capacidade de verificação do
-código por meio de testes automatizados e de métricas de cobertura.
+código por meio de testes automatizados e de métricas de cobertura.~\cite{mcconnell2004code}.
 
 % Apresentar os atributos que tornam um código mais legível, manutenível,
 % consistente e menos propenso a falhas. Nesta seção, também devem ser
@@ -25,70 +37,68 @@ código por meio de testes automatizados e de métricas de cobertura.
 % objetiva.
 
 \subsection{Testes de software}
-
 O teste de software tem como intuito executar o programa ou modelo utilizando algumas entradas em particular e verificar se
 seu comportamento está de acordo com o esperado. Caso a execução apresente resultados não especificados, dizemos que um erro ou defeito
-foi identificado. Além disso, os dados de tal execução podem servir como fonte de informação para a localização e a correção de tais defeitos \cite{delamaro2007}.
+foi identificado. Além disso, os dados de tal execução podem servir como fonte de informação para a localização e a correção de tais defeitos.~\cite{delamaro2007}.
 
-% Os testes de software têm como objetivo verificar se o sistema atende aos requisitos esperados e se mantém estável diante de
-% alterações. Em ambientes de desenvolvimento contínuo, os testes automatizados ajudam a reduzir regressões e oferecem feedback
-% rápido sobre mudanças no código.
+Podem também ser divididos em três fases, que podemos estabelecer como: testes de unidade, de integração e de sistemas.
+O teste de unidade foca nas menores unidades do programa, como funções, procedimentos, métodos e classes.
+O teste de integração tem ênfase na construção da estrutura do sistema, verificando a integração entre partes do código.
+Por fim o teste de sistemas avalia o sistema completo, verificando se as funcionalidades especificadas nos documentos de requisitos estão implementadas corretamente~\cite{valente2020engenharia}.
 
-Além de apoiar a detecção de defeitos, uma suíte de testes bem estruturada contribui para a manutenção e evolução do software,
-pois torna mais segura a correção e a inclusão de novas funcionalidades.
+Para a análise feita no Agromart focamos na fase de testes de unidade, utilizado no cálculo da porcentagem da cobertura de testes do código-fonte.
+
+\subsection{Testes funcionais}
+
+Teste funcional, é uma técnica utilizada para se projetarem casos de teste na qual o programa ou sistema é considerado uma caixa preta e,
+para testá-lo, são fornecidas entradas e avaliadas as saídas geradas para verificar se estão em conformidade com os objetivos especificados.~\cite{delamaro2007}
+
+Quando se está testando funções, deve-se projetar testes que cubram todos os aspéctos do objeto, ou seja, testar todas as operações,
+definir e verificar todos os atributos associados e colocar a função sob todos os possíveis estados, isso é, testar tanto sucesso quanto falhas e qualquer evento que cause uma mudança de estado.~\cite{sommerville2011software}
+
+Para este trabalho os testes funcionais são de extrema importância, visto que a cobertura de testes é preenchida principalmente por eles.
+Com isso em mente faremos uma análise de o que e aonde os testes do projeto cobrem e como podemos melhorar e ajustar o necessário.
 
 \subsection{Cobertura de testes}
 
-Cobertura de testes é uma métrica que ajuda a definir o número de testes que precisamos escrever para um programa.
-Ela mede o percentual de comandos de um programa que são cobertos por testes \cite{valente2020engenharia}, isto é:
-cobertura de testes = (número de comandos executados pelos testes) / (total de comandos do programa)
+Podemos definir cobertura de teste pelo número de comandos executados pelos testes dividido pelo total de comandos do programa.
+Essa fórmula nos dá o percentual de comandos testados num programa, ou seja, é a métrica que nos ajuda a definir o número de testes que precisamos escrever para um software.~\cite{valente2020engenharia}.
 
-Não existe número mágico ideal para a cobertura e tão pouco é esperado que um projeto alcançe 100\% de cobertura.
-De acordo com a literatura \cite{valente2020engenharia}, essa resposta varia de projeto para projeto e depende de vários fatores, como complexidade dos requisitos, criticidade do projeto, etc.
-Ao invés de ter um valor fixo, deve-se monitorar a evolução dos valores de cobertura ao longo do tempo e verificar trexos do código
-não testados e avaliar se são relevantes e também se não possuem uma dificuldade elevada para ser testados.
+%Cobertura de testes é uma métrica que ajuda a definir o número de testes que precisamos escrever para um programa.
+%Ela mede o percentual de comandos de um programa que são cobertos por testes, isto é:
+%cobertura de testes = (número de comandos executados pelos testes) / (total de comandos do programa)~\cite{valente2020engenharia}
 
-Dito isso, times que valorizam mais a escrita de código com testes normalmente alcançam algo em torno de 70\% de cobertura \cite{sommerville2011software}.
-Enquanto uma coberura abaixo de 50\% costuma ser preocupante \cite{fowler2012test}.
-E mesmo em projetos que usam de TDD, a cobertura não costuma chegar a 100\%, visto que normalmente fique acima de 90\% \cite{sommerville2011software}.
+Não existe número mágico ideal para a cobertura e tão pouco é esperado que um projeto alcançe os 100\%.
+A resposta de quanto um projeto precisa atender varia de projeto a projeto e nunca é um valor completamente fixo,
+ele depende de divérsos fatores como complexidade dos requisitos, quão crítico é, datas de entrega, entre outros.
+Também deve-se monitorar a evolução dos valores de cobertura e verificar código não testado para entender se é relevante
+e se não possui uma dificuldade alta de testar, com isso pesar se deve ser ignorado.~\cite{valente2020engenharia}.
+
+%De acordo com a literatura, essa resposta varia de projeto para projeto e depende de vários fatores, como complexidade dos requisitos, criticidade do projeto, etc.
+%Ao invés de ter um valor fixo, deve-se monitorar a evolução dos valores de cobertura ao longo do tempo e verificar trexos do código
+%não testados e avaliar se são relevantes e também se não possuem uma dificuldade elevada para ser testados.~\cite{valente2020engenharia}.
+
+Dito isso, cobertura de testes não é o mesmo que qualidade de testes, é muito fácil alcançar uma cobertura alta com testes de baixa qualidade.
+Por exemplo, testes que buscam por erros que não acontecem com frequência tem pouco impacto na qualidade do código e é muito fácil escrever
+testes para buscar atingir um número de cobertura alta, então é preciso criar testes que sejam bem pensados.~\cite{fowler2012test}.
+
+O SonarQube tem como padrão uma cobertura mínima de 80\%. Não há pesquisas ou análises externas que expliquem o porquê da escolha,
+assumo pessoalmente que foi adotado como um valor padrão por representar a alta cobertura do código e por se repetir em divérsos outros programas.
+Devido a isso, esse foi o valor escolhido como base para o trabalho, por recomendação do próprio progama, e que será referência quando for citado como valor alvo.
+
 
 % A cobertura de testes indica a proporção do código exercitada pelos testes
 % automatizados. Ela não garante ausência de defeitos, mas ajuda a identificar
 % partes pouco verificadas e a orientar a ampliação da suíte de testes.
 
-\subsection{Testes funcionais}
-
-Teste funcional é uma técnica utilizada para se projetarem casos de teste na qual o programa ou sistema é considerado uma caixa preta e,
-para testa-lo, são fornecidas entradas e avaliadas as saídas geradas para verificar se estão em conformidade com os objetivos especificados. \cite{delamaro2007}
-
-
-
-\subsection{Baixa cobertura e risco de qualidade}
-
-Quando a cobertura está baixa, parte relevante do comportamento da aplicação permanece sem verificação automatizada. Isso
-aumenta o risco de falhas em produção, dificulta a identificação rápida de regressões e reduz a confiança da equipe na evolução
-do sistema.
-
-Por esse motivo, a interpretação da cobertura deve ser feita em conjunto com o contexto do projeto, priorizando áreas críticas
-de negócio e pontos historicamente mais suscetíveis a defeitos.
-
 \section{Análise estática}
 
-A análise estática permite avaliar o código sem executar a aplicação, identificando problemas de qualidade, manutenção e
-confiabilidade de forma antecipada. No contexto deste trabalho, ela atua como apoio ao diagnóstico da cobertura de testes,
+A análise estática faz a busca por erros comuns no código-fonte, erros já estudados que ocorrem com frequência.
+Essa previsibilidade faz possível essa análise e busca por erros sem a necessidade de executar o código.~\cite{louridas2006}.
+
+A análise estática permite avaliar o código identificando problemas de qualidade, manutenção e confiabilidade de forma antecipada.
+No contexto deste trabalho, ela atua como apoio ao diagnóstico da cobertura de testes,
 fornecendo indicadores que orientam a priorização de melhorias.
-
-\section{SonarQube}
-
-O SonarQube é uma plataforma de gerenciamento contínuo da qualidade de código muito utilizada na indústria de software.
-Ele realiza análises de codigo-fonte para identificar problmeas na qualidade do código e oferece medidas para
-segurança, manutenibilidade, confiabilidade, entre outros. A ferramenta também oferece métricas como cobertura de testes,
-complexidade ciclomática, complexidade cognitiva e duplicidade de código. É uma plataforma web robusta com suporte multiliguagem,
-integração com diversas ferramentas de desenvolvimento e versionamento como GitHub, Jenkins e GitLab,
-com capacidade de personalização das regras de análise.
-
-Tudo isso se baseia em sete eixos: Arquitetura e Projeto, Testes, Comentários, Complexidade, Regras de Codificação,
-Erros Potenciais e Duplicidade de Código. Além de integrar outras ferramentas de análise estática para avaliação de código-fonte.
 
 % Descrever a ferramenta SonarQube, suas métricas, regras e como ela pode ser
 % usada para apoiar a avaliação da qualidade do código, especialmente na
