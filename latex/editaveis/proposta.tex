@@ -1,8 +1,29 @@
 \chapter{Proposta}
 
+Este capítulo apresenta a proposta de melhoria para o repositório \textit{interface-web} do AgroMart,
+elaborada a partir dos resultados obtidos na análise estática do repositório derivadas da ferramenta SonarQube.
+O objetivo é definir ações para elevar a qualidade interna do código, com foco em prevenção de falhas.
+
+%Qual a proposta? Como se forma? O que ela fala?
+
+%Com base no diagnóstico realizado, foram identificados pontos que impactam diretamente a evolução do sistema, como baixa cobertura de testes e
+%ocorrências de \textit{code smells}.
+%A proposta, portanto, sugere ações para tratar desses problemas de forma estruturada e priorizada.
+%
+%As ações sugeridas foram definidas considerando impacto e esforço de implementação, de modo a orientar melhorias progressivas e mensuráveis.
+%Ao final, espera-se fortalecer a base de testes automatizados e tornar o código mais estável e sustentável para futuras evoluções,
+%além de consolidar boas práticas de desenvolvimento com maior foco em qualidade e segurança.
+
 \section{Problemas identificados}
 
-Listar os principais pontos de melhoria observados no contexto analisado.
+Após análise via SonarQube o principal problema identificado é a baixa cobertura de testes em código-fonte.
+Também é notável a presença de alguns \textit{code smells}, mas esses somam apenas trinta, o que o SonarQube categoriza como nota A,
+além disso, também são apontados dois pontos de possível falha de segurança, que após analise mais detalhada, são classificados como falsos positivos.
+
+Dessa forma o foco desta proposta está na cobertura de testes do código, visto que essa se encontra em apenas 0,5\%,
+indicando que a maior parte do código todo se encontra sem testes automatizados.
+
+%Listar os principais pontos de melhoria observados no contexto analisado.
 
 \section{Ações propostas}
 
