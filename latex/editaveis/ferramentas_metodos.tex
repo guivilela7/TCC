@@ -2,13 +2,33 @@
 
 \section{Ferramentas}
 
-Relacionar as ferramentas utilizadas no desenvolvimento e na análise do
-trabalho.
+As ferramentas utilizadas neste trabalho foram selecionadas para cobrir análise de qualidade, implementação de testes e versionamento do código no contexto do \textit{AgroMart Web}.
+
+\begin{itemize}
+	\item \textbf{SonarQube}: utilizado para análise estática e acompanhamento de métricas de qualidade, com foco em cobertura de testes, \textit{code smells}, duplicidade e indicadores de manutenibilidade~\cite{sonarqube};
+	\item \textbf{React Testing Library}: utilizada para implementação de testes unitários com foco no comportamento dos componentes React;
+	\item \textbf{Jest}: utilizado como executor de testes, asserções e coleta de cobertura no projeto, integrado ao \textit{react-scripts test};
+	\item \textbf{TypeScript}: utilizado no desenvolvimento do \textit{AgroMart Web}, impactando diretamente a escrita e validação dos testes;
+	\item \textbf{Git e GitHub}: utilizados para controle de versão, organização das contribuições e revisão das alterações por meio de \textit{pull requests};
+	\item \textbf{GitHub Actions}: utilizado para automatizar etapas de integração contínua, como execução de testes e validações a cada \textit{push} ou \textit{pull request}.
+\end{itemize}
+
+Além dessas ferramentas, também foram utilizados os scripts nativos do projeto para execução local dos testes e validação incremental das alterações.
 
 \section{Métodos}
 
-Explicar a metodologia adotada para levantamento, análise e tratamento dos
-dados ou evidências.
+%A metodologia adotada é incremental e orientada por métricas, organizada em ciclos de melhoria contínua:
+%
+%\begin{enumerate}
+%	\item \textbf{Diagnóstico inicial}: execução de análise global no SonarQube para estabelecer a linha de base das métricas e identificar os problemas prioritários;
+%	\item \textbf{Mapeamento de unidades fundamentais}: análise do código para identificar unidades de comportamento essenciais ao funcionamento da aplicação;
+%	\item \textbf{Implementação de testes}: escrita e execução de testes unitários para as unidades priorizadas em cada ciclo, com validação local e em \textit{workflow} de CI;
+%	\item \textbf{Medição de impacto}: comparação das métricas antes e depois de cada intervenção, com foco na evolução da cobertura e da manutenibilidade;
+%	\item \textbf{Iteração}: repetição do ciclo até alcançar o nível mínimo de cobertura definido para o trabalho;
+%	\item \textbf{Consolidação}: registro das decisões e padronização das práticas de teste em documentação de desenvolvimento para apoiar contribuições futuras.
+%\end{enumerate}
+%
+%Esse método permite combinar ganho técnico progressivo com rastreabilidade dos resultados, reduzindo o risco de mudanças sem validação automatizada.
 
 \section{Cronograma}
 

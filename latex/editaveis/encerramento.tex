@@ -2,9 +2,16 @@
 
 \section{Considerações finais}
 
-Retomar os principais resultados e sintetizar o que foi alcançado com a
-proposta desenvolvida.
+Este trabalho partiu do diagnóstico de baixa cobertura de testes no AgroMart Web, identificado por análise automatizada no SonarQube, e delimitou como problema central o risco que esse cenário impõe à manutenção e à evolução segura da aplicação. A partir desse contexto, foi estruturada uma proposta de melhoria orientada por métricas, com foco em ampliar progressivamente a cobertura de testes nas unidades fundamentais do sistema.
+
+Como contribuição, o trabalho consolidou uma estratégia de intervenção em ciclos, composta por diagnóstico inicial, priorização de unidades, implementação de testes unitários, acompanhamento de métricas e padronização de práticas de desenvolvimento. Essa organização busca transformar a melhoria de cobertura em um processo contínuo, e não em uma ação pontual.
+
+Assim, o principal resultado deste estudo é a definição de um caminho técnico e metodológico para elevar a qualidade do código do AgroMart Web de forma rastreável, com base em evidências e alinhada às necessidades de sustentabilidade do projeto.
 
 \section{Trabalhos futuros}
 
-Indicar desdobramentos possíveis para ampliar ou evoluir a solução proposta.
+Como continuidade deste trabalho, recomenda-se a execução completa dos ciclos propostos até atingir o nível mínimo de cobertura definido, com reavaliações periódicas no SonarQube para ajuste de prioridades.
+Também é relevante evoluir a documentação de desenvolvimento com exemplos práticos por módulo, padrões de teste reutilizáveis e critérios de revisão específicos para qualidade de testes em \textit{pull requests}.
+
+Por fim, uma frente futura importante é integrar \textit{quality gates} mais explícitos em \textit{CI/CD}, tornando obrigatória a validação automática dos critérios mínimos de cobertura antes da integração
+de novas contribuições, consolidando a qualidade de testes como requisito contínuo do processo de desenvolvimento.

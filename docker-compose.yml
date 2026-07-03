@@ -4,4 +4,4 @@ services:
         context: .
       volumes:
           - ./latex:/home/latex
-      command: bash -c 'make clean && make'
+      command: bash -c 'make dist-clean && make'

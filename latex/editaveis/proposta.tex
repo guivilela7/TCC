@@ -2,7 +2,9 @@
 
 Este capítulo apresenta a proposta de melhoria para o repositório \textit{interface-web} do AgroMart,
 elaborada a partir dos resultados obtidos na análise estática do repositório derivadas da ferramenta SonarQube.
-O objetivo é definir ações para elevar a qualidade interna do código, com foco em prevenção de falhas.
+O objetivo é definir ações para elevar a qualidade interna do código, com foco em prevenção de falhas e ampliação consistente da cobertura de testes.
+A proposta adota uma abordagem orientada por diagnóstico, iniciando com análise global do projeto no SonarQube para definição da linha de base das métricas.
+Com esse diagnóstico, as intervenções passam a priorizar unidades fundamentais da aplicação, buscando ampliar a cobertura de forma progressiva e mensurável até um nível mínimo considerado adequado para apoiar manutenção e evolução.
 
 %Qual a proposta? Como se forma? O que ela fala?
 
@@ -14,23 +16,41 @@ O objetivo é definir ações para elevar a qualidade interna do código, com fo
 %Ao final, espera-se fortalecer a base de testes automatizados e tornar o código mais estável e sustentável para futuras evoluções,
 %além de consolidar boas práticas de desenvolvimento com maior foco em qualidade e segurança.
 
+
 \section{Problemas identificados}
 
-Após análise via SonarQube o principal problema identificado é a baixa cobertura de testes em código-fonte.
-Também é notável a presença de alguns \textit{code smells}, mas esses somam apenas trinta, o que o SonarQube categoriza como nota A,
-além disso, também são apontados dois pontos de possível falha de segurança, que após analise mais detalhada, são classificados como falsos positivos.
+Após análise via SonarQube, o principal problema identificado é a baixa cobertura de testes em código-fonte.
+Também é notável a presença de alguns \textit{code smells}, mas esses somam apenas trinta, o que o SonarQube categoriza como algo aceitável e estamos de acordo com a análise,
+além disso, também são apontados dois pontos de possível falha de segurança, que após análise mais detalhada, foram classificados como falsos positivos e descartados.
 
-Dessa forma o foco desta proposta está na cobertura de testes do código, visto que essa se encontra em apenas 0,5\%,
-indicando que a maior parte do código todo se encontra sem testes automatizados.
+Dessa forma, o foco desta proposta está na cobertura de testes do código, visto que essa se encontra em apenas 0,5\%,
+indicando que a maior parte do código está sem testes automatizados.
+Esse cenário reduz a confiança para manutenção e evolução do sistema, pois mudanças em unidades fundamentais tendem a ocorrer sem proteção automatizada suficiente contra regressões.
+Assim, o problema priorizado nesta proposta é a baixa cobertura de testes nas unidades de comportamento essenciais da aplicação.
 
 %Listar os principais pontos de melhoria observados no contexto analisado.
 
+
 \section{Ações propostas}
 
-Descrever as intervenções sugeridas para cada problema identificado, com foco
-em correção, prevenção e padronização.
+As ações propostas estão organizadas em cinco frentes complementares.
+A primeira consiste na configuração e execução de uma análise inicial global no SonarQube para identificar e priorizar os pontos mais críticos de qualidade.
+A segunda consiste no mapeamento das unidades fundamentais do \textit{interface-web}, considerando relevância funcional e risco para manutenção.
+A terceira consiste na implementação e execução de testes unitários para as unidades selecionadas, ampliando gradualmente a cobertura do código.
+A quarta consiste no acompanhamento da evolução das métricas de cobertura e manutenibilidade no SonarQube, de modo a orientar ciclos contínuos de melhoria.
+A quinta consiste na elaboração de uma documentação de desenvolvimento englobando testes, com orientações de estrutura, padrões de escrita, execução local e em \textit{pipeline}, e critérios mínimos para novas contribuições.
+
+%Descrever as intervenções sugeridas para cada problema identificado, com foco
+%em correção, prevenção e padronização.
 
 \section{Priorização}
 
-Organizar as ações por ordem de impacto ou urgência, facilitando a execução
-da proposta.
+A priorização foi definida por impacto e viabilidade.
+Primeiro, realiza-se o diagnóstico global no SonarQube para construção da linha de base e identificação dos alvos de maior relevância.
+Segundo, concentra-se o esforço na escrita de testes para unidades fundamentais, começando pelas de maior criticidade funcional.
+Terceiro, avalia-se continuamente o efeito das intervenções nas métricas de qualidade para orientar a expansão incremental dos testes.
+Quarto, consolida-se a documentação de desenvolvimento para transformar o ganho pontual em prática recorrente no projeto.
+Com essa ordem, a proposta busca aumentar a cobertura de forma sustentável em todo o projeto, com ganhos progressivos para a qualidade do AgroMart Web.
+
+%Organizar as ações por ordem de impacto ou urgência, facilitando a execução
+%da proposta.

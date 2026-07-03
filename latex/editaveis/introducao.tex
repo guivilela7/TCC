@@ -1,31 +1,77 @@
 \chapter{Introdução}
 
+A agricultura familiar é componente importante da receita do país, em 2006 o Censo Agrícola mostrou que o valor anual da produção da agricultura familiar foi de 54,5 bilhões de reais, somando a 33,2\% do valor total da produção agrícola brasileira.
+Mesmo com esse valor, ainda existem muitas dificuldades na compra e venda de produtos de pequenos agricultores,
+com isso em mente, se forma o conceito de Comunidade que Sustenta a Agricultura (CSA). A CSA é um modelo de organização econômica e social que aproxima diretamente quem produz de quem consome,
+reduzindo ou eliminando intermediários da cadeia tradicional de comercialização. Nesse arranjo, agricultor e co-agricultor estabelecem um compromisso contínuo:
+mediante assinatura paga, o co-agricultor recebe cestas semanais ou quinzenais com produtos orgânicos e pode optar por adicionar produtos sazonais cultivados localmente.
+Esse formato é especialmente relevante para a agricultura familiar, pois favorece previsibilidade de renda, compartilhamento de riscos e fortalecimento da produção em pequena escala~\cite{redecsabrasil, silva2024contribuicao}.
+
+No contexto dessa dinâmica surge o AgroMart, um conjunto de aplicações livres voltado à gestão de CSAs e à comunicação entre agricultores e co-agricultores.
+A iniciativa nasceu em um \textit{hackathon} promovido pela FCTE/UnB durante a pandemia de COVID-19, quando restrições de contato impactaram fortemente os canais tradicionais de comercialização, principalmente para agricultores familiares.
+Desde então, o projeto evoluiu para um ecossistema composto por aplicação web de gerenciamento da CSA,
+aplicação mobile de interação com co-agricultores e aplicações de apoio à implantação e operação dos softwares~\cite{lucas2021agromart}.
+
+Ao longo dos anos seguintes, o desenvolvimento do AgroMart foi impulsionado por múltiplos TCCs em frentes complementares, como:
+implementação de funcionalidades de negócio nas versões web e mobile, evolução de mecanismos de implantação e execução,
+estudos de viabilidade técnica e financeira em infraestruturas de baixo custo e trabalhos de manutenção e evolução com foco em usabilidade.
+Para exemplo temos o primeiro TCC feito após a criação do AgroMart, que teve como foco adequação do projeto aos padrões \textit{open source},
+geração de artefatos, como documentos de arquitetura do software, e a implementação de sistemas de pagamento e notificações mobile~\cite{correa2023evolucaoagromart}.
+Na evolução da implantação e execução do ambiente temos outro TCC em 2023, que teve como objetivo individualizar e automatizar o ambiente para as CSAs de forma que elas sejam
+capazes de criar e controlar seu ambiente no AgroMart e também um em 2024, que além de outros objetivos, fez a implementação do aplicativo mobile na Play Store~\cite{freitas2023implantacaoagromart, siqueira2024integracaoagromart}.
+Com maior foco na redução dos custos da aplicação, em 2023, outro trabalho explorou o modelo de \textit{deploy} via AWS\@~\cite{ribeiro2023agromartcloud}.
+Por fim, como exemplo de manutenção, destaca-se a migração da interface web, feita em 2025, motivada por limitações de usabilidade do painel anterior,
+resultando em uma interface mais responsiva e aderente às necessidades do projeto~\cite{nishimura2025agromart}.
+
+Apesar dos avanços, o histórico de desenvolvimento descentralizado e independente trouxe consequências para a qualidade interna do código.
+Em geral, cada trabalho foi conduzido com regras próprias e sem exigência objetiva de níveis mínimos de qualidade para integração ao repositório do AgroMart.
+Ainda que exista proposta anterior de padronização do processo de desenvolvimento, a ausência de critérios técnicos explícitos para qualidade de código mantém lacunas importantes,
+especialmente quanto à criação de testes automatizados e à avaliação contínua dos atributos de qualidade.
+
 \section{Definição do problema}
 
-Descrever o problema central que motivou o trabalho, delimitando o contexto
-em que ele ocorre e os efeitos observados.
+A análise automatizada da aplicação web indica que o problema mais crítico é a cobertura de testes extremamente baixa, comprometendo a capacidade de evolução segura do sistema.
+\textbf{Dessa forma, caracteriza-se como principal problema do AgroMart Web a baixíssima cobertura de código decorrente da não obrigatoriedade de escrita de testes automatizados no processo de desenvolvimento.}
+
+De forma detalhada, o diagnóstico aponta cobertura de apenas 0,5\% em todo código do repositório analisado,
+com \textbf{2186} linhas elegíveis para cobertura e apenas \textbf{14} linhas efetivamente cobertas por testes.
+Esse cenário se origina de um processo de desenvolvimento historicamente fragmentado, no qual os projetos foram executados sem critérios homogêneos de qualidade,
+com baixa priorização da atividade de testes e sem adoção sistemática de práticas como TDD. Como consequência, atividades de manutenção e evolução ficam mais arriscadas,
+pois alterações no código passam a ter menor rastreabilidade de impacto e maior probabilidade de introduzir defeitos regressivos.
 
 \section{Justificativa}
 
-Apresentar a relevância do tema e por que a investigação proposta é
-necessária no cenário estudado.
+Garantir qualidade de software em termos de atributos de código é essencial para sustentar evolução contínua do produto.
+Em geral, códigos com melhor estrutura interna tendem a apresentar maior modularidade, menor acoplamento, maior coesão e melhor legibilidade,
+características diretamente associadas à manutenibilidade e à redução de custo de mudanças ao longo do ciclo de vida do produto~\cite{iso25010,mcconnell2004code,valente2020engenharia}.
 
-\section{Objetivo geral}
+No contexto do AgroMart, a cobertura de testes é um indicador relevante de qualidade interna por representar a extensão com que o código é exercitado por testes automatizados.
+Embora não exista um limiar universalmente obrigatório, valores a partir de 70\% são frequentemente utilizados como referência aceitável em contextos tradicionais,
+enquanto projetos orientados por TDD podem atingir patamares superiores, frequentemente acima de 90\%~\cite{valente2020engenharia}.
 
-Indicar, de forma direta, o que o trabalho pretende alcançar ao final da
-pesquisa.
+Outro ponto central é que refatorações seguras dependem de uma base de testes que valide preservação de comportamento.
+Quanto maior e mais representativa a cobertura, maior tende a ser a confiança para evoluir o código sem degradar funcionalidades existentes,
+o que é especialmente importante para projetos acadêmicos com manutenção incremental por diferentes equipes ao longo do tempo~\cite{fowler2012test,valente2020engenharia}.
 
-\section{Objetivos específicos}
+\section{Objetivos geral e específicos}
+
+\textbf{O objetivo geral deste trabalho é aumentar a qualidade do código do AgroMart Web por meio da implementação de testes unitários, priorizados a partir da análise realizada, elevando a cobertura até um nível mínimo considerado suficiente para apoiar manutenção e evolução com menor risco.}
+
+\subsection{Objetivos específicos}
+
+Para alcançar o objetivo geral, foram definidos os seguintes objetivos específicos:
 
 \begin{itemize}
-	\item Detalhar os passos necessários para atingir o objetivo geral;
-	\item Organizar a análise do problema em partes menores;
-	\item Preparar a base para a proposta apresentada nos capítulos seguintes.
+	\item Realizar uma análise inicial do projeto como um todo no SonarQube para identificar e priorizar os principais problemas de qualidade de código;
+	\item Analisar o código da aplicação para identificar unidades de comportamento fundamental para o funcionamento do AgroMart Web;
+	\item Escrever e executar casos de teste para as unidades selecionadas, ampliando progressivamente a cobertura de código;
+	\item Avaliar o efeito da ampliação de testes sobre o atributo de manutenibilidade, com base em métricas de análise automatizada;
+	\item Repetir o processo até alcançar o nível mínimo de cobertura de testes definido neste trabalho;
+	\item Consolidar um fluxo mínimo de qualidade para apoiar futuras contribuições no repositório.
 \end{itemize}
 
 \section{Estrutura do trabalho}
 
-Apresentar, de forma resumida, como o documento está organizado:
-capítulo 1 com a introdução, capítulo 2 com a fundamentação teórica,
-capítulo 3 com a proposta, capítulo 4 com ferramentas e métodos e
-capítulo 5 com o encerramento.
+Este trabalho está organizado em cinco capítulos. O Capítulo 1 apresenta a introdução, com contexto, problema, justificativa e objetivos.
+O Capítulo 2 descreve a fundamentação teórica que sustenta a pesquisa. O Capítulo 3 apresenta a proposta de intervenção no AgroMart Web.
+O Capítulo 4 detalha ferramentas e métodos utilizados na execução do trabalho. Por fim, o Capítulo 5 apresenta as considerações finais.

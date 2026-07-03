@@ -36,7 +36,7 @@ SOURCES = $(FIXOS_FILES) $(EDITAVEIS_FILES)
 all:
 	@$(MAKE) $(TARGET)
 
-$(TARGET): $(MAIN_FILE) $(SOURCES) bibliografia.bib
+$(TARGET): $(MAIN_FILE) $(SOURCES) bibliografia.bib abntex2-alf.bst
 	$(LATEX) $(MAIN_FILE)
 	$(BIBTEX) $(AUX_FILE)
 	$(LATEX) $(MAIN_FILE)

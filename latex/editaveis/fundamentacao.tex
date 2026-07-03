@@ -1,17 +1,17 @@
 \chapter{Fundamentação teórica}
 
 Ao longo deste capitulo será descrito tópicos importantes para o entendimento deste trabalho.
-Os conceitos apresentados serão: (i) características de qualidade em código, (ii) testes de software, (iii) cobertura de testes,
-(iv) análise estática e (v) a ferramenta SonarQube, utilizada no processo de avaliação.
+Os conceitos apresentados serão: (i) características de qualidade em código, (ii) testes de software, (iii) desenvolvimento orientado a testes (TDD), (iv) cobertura de testes,
+(v) análise estática e (vi) a ferramenta SonarQube, utilizada no processo de avaliação.
 
 \section{SonarQube}
 
 O SonarQube é uma plataforma de gerenciamento automático da qualidade e análise de segurança de código.
 Ele permite que organizações e indivíduos revisem, monitorem e melhorem a qualidade do código-fonte dos seus projetos,
-identificando problemas como bugs, vulnerabilidades e \textit{code smells}, oferecendo medidas para segurança, manutenibilidade, confiabilidade e outros.
+identificando problemas como \textit{bugs}, vulnerabilidades e \textit{code smells}, oferecendo medidas para segurança, manutenibilidade, confiabilidade e outros.
 A ferramenta também oferece métricas como cobertura de testes, complexidade ciclomática, complexidade cognitiva e duplicidade de código.
 É uma plataforma web robusta, com suporte multilíngue, integração com diversas ferramentas de desenvolvimento e versionamento como GitHub, Jenkins e GitLab,
-com capacidade de personalização das regras de análise.~\cite{sonarqube}.
+com capacidade de personalização das regras de análise~\cite{sonarqube}.
 
 Utilizamos a plataforma para gerar um relatório completo do repositório \textit{interface-web} do AgroMart; com ele, podemos explorar as métricas do repositório de forma visual e quantitativa,
 observando quais estão positivas e negativas. Assim podemos entender onde se encontram os problemas do projeto e definirmos em qual focar.
@@ -21,7 +21,7 @@ observando quais estão positivas e negativas. Assim podemos entender onde se en
 De acordo com a ISO/IEC 25010, a qualidade de software pode ser avaliada por meio de características como
 adequação funcional, eficiência de desempenho, compatibilidade, usabilidade, confiabilidade, segurança, manutenibilidade e portabilidade. Portanto podemos concluir que
 a qualidade de software não é unilateral e varia de ponto de vista e de acordo com o contexto em que o software é utilizado.
-Neste trabalho, a característica mais relacionada é a manutenibilidade, pois ela se associa à facilidade de compreender, modificar e testar o código-fonte.~\cite{iso25010}.
+Neste trabalho, a característica mais relacionada é a manutenibilidade, pois ela se associa à facilidade de compreender, modificar e testar o código-fonte~\cite{iso25010}.
 
 Segundo McConnell, a qualidade de código pode ser dividida em duas categorias: Qualidade Externa e Qualidade Interna.
 Qualidade Externa trata da percepção do usuário final sobre o software, ela vem de uma visão de fora sem conhecimento de código-fonte.
@@ -29,7 +29,7 @@ Esse tipo de qualidade é medida por meio de testes de aceitação, controle de 
 Qualidade Interna se relaciona a percepção do desenvolvedor sobre o software, aquele que tem conhecimento do código-fonte
 e vê os elementos que não são aparentes ao usuário. Seus aspectos de qualidade podem ser medidas por métricas de código,
 permitindo um cálculo quantitativo da qualidade do software. Neste trabalho, o foco está na capacidade de verificação do
-código por meio de testes automatizados e de métricas de cobertura.~\cite{mcconnell2004code}.
+código por meio de testes automatizados e de métricas de cobertura~\cite{mcconnell2004code}.
 
 % Apresentar os atributos que tornam um código mais legível, manutenível,
 % consistente e menos propenso a falhas. Nesta seção, também devem ser
@@ -39,7 +39,7 @@ código por meio de testes automatizados e de métricas de cobertura.~\cite{mcco
 \subsection{Testes de software}
 O teste de software tem como intuito executar o programa ou modelo utilizando algumas entradas em particular e verificar se
 seu comportamento está de acordo com o esperado. Caso a execução apresente resultados não especificados, dizemos que um erro ou defeito
-foi identificado. Além disso, os dados de tal execução podem servir como fonte de informação para a localização e a correção de tais defeitos.~\cite{delamaro2007}.
+foi identificado. Além disso, os dados de tal execução podem servir como fonte de informação para a localização e a correção de tais defeitos~\cite{delamaro2007}.
 
 Podem também ser divididos em três fases, que podemos estabelecer como: testes de unidade, de integração e de sistemas.
 O teste de unidade foca nas menores unidades do programa, como funções, procedimentos, métodos e classes.
@@ -51,13 +51,28 @@ Para a análise feita no Agromart focamos na fase de testes de unidade, utilizad
 \subsection{Testes funcionais}
 
 Teste funcional, é uma técnica utilizada para se projetar casos de teste no qual o programa ou sistema é considerado uma caixa preta e,
-para testá-lo, são fornecidas entradas e avaliadas as saídas geradas para verificar se estão em conformidade com os objetivos especificados.~\cite{delamaro2007}
+para testá-lo, são fornecidas entradas e avaliadas as saídas geradas para verificar se estão em conformidade com os objetivos especificados~\cite{delamaro2007}.
 
 Quando se está testando funções, deve-se projetar testes que cubram todos os aspectos do objeto, ou seja, testar todas as operações,
-definir e verificar todos os atributos associados e colocar a função sob todos os possíveis estados, isso é, testar tanto sucesso quanto falhas e qualquer evento que cause uma mudança de estado.~\cite{sommerville2011software}
+definir e verificar todos os atributos associados e colocar a função sob todos os possíveis estados, isso é, testar tanto sucesso quanto falhas e qualquer evento que cause uma mudança de estado~\cite{sommerville2011software}.
 
 Para este trabalho os testes funcionais são de extrema importância, visto que a cobertura de testes é preenchida principalmente por eles.
 Com isso em mente, faremos uma análise de o que e onde os testes do projeto cobrem e como podemos melhorar e ajustar o necessário.
+
+\subsection{Desenvolvimento orientado a testes}
+
+O Desenvolvimento Orientado a Testes, do inglês \textit{Test-Driven Development} (TDD), é uma abordagem de desenvolvimento de software na qual a escrita dos testes é feita antes da implementação do código.
+Em vez de escrever o código e depois verificá-lo, o desenvolvedor primeiro define um teste que especifica o comportamento esperado de uma função, executa esse teste, que inevitavelmente falha, já que o código ainda não existe, e só então implementa a função com o objetivo de fazer o teste passar.
+Esse ciclo é frequentemente descrito como \textit{Red-Green-Refactor}: o teste falha (\textit{red}), o código é escrito para fazê-lo passar (\textit{green}) e, em seguida, o código é refatorado mantendo os testes passando~\cite{sommerville2011software}.
+
+Sommerville aponta quatro benefícios centrais do TDD\@.
+O primeiro é a cobertura de código: como cada trecho de funcionalidade implementada corresponde a pelo menos um teste escrito previamente, a cobertura tende a ser mais ampla e intencional do que em projetos onde os testes são escritos após a implementação.
+O segundo é a regressão: a suíte de testes construída incrementalmente ao longo do desenvolvimento serve como proteção automática contra defeitos introduzidos por mudanças futuras no código.
+O terceiro é a depuração simplificada: quando um teste falha, o escopo do problema tende a estar localizado no código recém-escrito, reduzindo o esforço de identificação e correção do defeito.
+O quarto é a documentação: os próprios testes descrevem o comportamento esperado das unidades, funcionando como especificação executável do sistema.~\cite{sommerville2011software}
+
+No contexto do AgroMart Web, o TDD não foi adotado ao longo do histórico de desenvolvimento do projeto, o que contribuiu diretamente para o cenário de baixa cobertura identificado.
+A ausência dessa prática significa que as unidades foram implementadas sem testes associados, tornando o processo de ampliação de cobertura retroativo e mais custoso do que seria em um fluxo orientado a testes desde a origem.
 
 \subsection{Cobertura de testes}
 
