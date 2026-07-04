@@ -1,4 +1,4 @@
-\chapter{Ferramentas e métodos}
+﻿\chapter{Ferramentas e métodos}
 
 \section{Ferramentas}
 
@@ -15,37 +15,42 @@ As ferramentas utilizadas neste trabalho foram selecionadas para cobrir análise
 
 Além dessas ferramentas, também foram utilizados os scripts nativos do projeto para execução local dos testes e validação incremental das alterações.
 
-\section{Métodos}
+\section{Metodologia}
 
-%A metodologia adotada é incremental e orientada por métricas, organizada em ciclos de melhoria contínua:
-%
-%\begin{enumerate}
-%	\item \textbf{Diagnóstico inicial}: execução de análise global no SonarQube para estabelecer a linha de base das métricas e identificar os problemas prioritários;
-%	\item \textbf{Mapeamento de unidades fundamentais}: análise do código para identificar unidades de comportamento essenciais ao funcionamento da aplicação;
-%	\item \textbf{Implementação de testes}: escrita e execução de testes unitários para as unidades priorizadas em cada ciclo, com validação local e em \textit{workflow} de CI;
-%	\item \textbf{Medição de impacto}: comparação das métricas antes e depois de cada intervenção, com foco na evolução da cobertura e da manutenibilidade;
-%	\item \textbf{Iteração}: repetição do ciclo até alcançar o nível mínimo de cobertura definido para o trabalho;
-%	\item \textbf{Consolidação}: registro das decisões e padronização das práticas de teste em documentação de desenvolvimento para apoiar contribuições futuras.
-%\end{enumerate}
-%
-%Esse método permite combinar ganho técnico progressivo com rastreabilidade dos resultados, reduzindo o risco de mudanças sem validação automatizada.
+A metodologia adotada neste trabalho é de natureza \textbf{exploratória}, com foco em diagnóstico e melhoria incremental da cobertura de testes no AgroMart Web.
+Assim, o estudo não se caracteriza como experimento controlado, pois não há manipulação de grupos, variáveis independentes e dependentes ou comparação estatística entre tratamentos.
+
+A condução metodológica foi organizada em ciclos de exploração e intervenção técnica:
+
+\begin{enumerate}
+	\item \textbf{Diagnóstico inicial}: execução de análise global no SonarQube para estabelecer a linha de base das métricas e identificar os problemas prioritários;
+	\item \textbf{Mapeamento de unidades fundamentais}: análise do código para identificar unidades de comportamento essenciais ao funcionamento da aplicação;
+	\item \textbf{Incremento de testes}: escrita e execução de testes unitários nas unidades priorizadas, com validação local e em \textit{workflow} de \textit{CI};
+	\item \textbf{Registro dos resultados}: comparação das métricas antes e depois de cada incremento, especialmente cobertura de testes e manutenibilidade;
+	\item \textbf{Consolidação}: sistematização das decisões e práticas em documentação de desenvolvimento para apoiar contribuições futuras.
+\end{enumerate}
+
+Dessa forma, os resultados apresentados representam evidências de evolução técnica obtidas durante a exploração do problema e a aplicação de incrementos de teste, e não inferências causais de um desenho experimental.
 
 \section{Cronograma}
 
-Apresentar a distribuição das atividades ao longo do tempo, considerando a
-entrega final em 03/07 e o início pela fundamentação teórica.
+A Tabela a seguir apresenta o cronograma planejado para o TCC 2, considerando o período letivo de 10/08 a 14/12/2026.
 
 \begin{table}[h]
 \centering
-\caption{Cronograma de desenvolvimento do trabalho}
+\caption{Cronograma de execução do TCC 2}
 \begin{tabular}{|c|p{10cm}|}
 \hline
-\textbf{Data} & \textbf{Atividade} \\ \hline
-23/06 a 25/06 & Escrita da fundamentação teórica, com foco em qualidade de código, análise estática e SonarQube. \\ \hline
-26/06 a 27/06 & Redação da proposta, organizando os problemas identificados e as ações sugeridas. \\ \hline
-28/06 a 29/06 & Escrita da seção de ferramentas e métodos, incluindo a definição do cronograma detalhado. \\ \hline
-30/06 a 01/07 & Revisão geral do texto, ajustes de coerência, padronização e complementação de trechos pendentes. \\ \hline
-02/07 & Revisão final, conferência de referências, formatação e correções finais. \\ \hline
-03/07 & Finalização do documento e entrega. \\ \hline
+\textbf{Período} & \textbf{Atividade} \\ \hline
+10/08 a 23/08 & Planejamento do TCC 2, revisão do escopo e configuração inicial do ambiente de análise e testes. \\ \hline
+24/08 a 13/09 & Revisão dos resultados já obtidos no SonarQube, atualização da linha de base e priorização das unidades fundamentais para incremento de testes. \\ \hline
+14/09 a 11/10 & Implementação do primeiro ciclo de testes unitários, execução local e em CI, com registro dos resultados parciais de cobertura. \\ \hline
+12/10 a 01/11 & Implementação do segundo ciclo de testes unitários, refinamento de casos de teste e reavaliação das métricas de qualidade. \\ \hline
+02/11 a 15/11 & Consolidação da documentação de desenvolvimento com diretrizes de testes e organização dos artefatos de evidência técnica. \\ \hline
+16/11 a 30/11 & Análise comparativa dos resultados (antes/depois), discussão dos ganhos obtidos e redação dos capítulos finais. \\ \hline
+01/12 a 10/12 & Revisão final do texto completo, ajustes de formatação, referências e validação de consistência geral do documento. \\ \hline
+11/12 a 14/12 & Fechamento do trabalho, preparação para entrega/defesa e submissão da versão final. \\ \hline
 \end{tabular}
 \end{table}
+
+
