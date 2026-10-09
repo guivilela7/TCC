@@ -1,29 +1,32 @@
 \chapter{Fundamentação teórica}
 
 Ao longo deste capitulo será descrito tópicos importantes para o entendimento deste trabalho.
-Os conceitos apresentados serão: (i) características de qualidade em código, (ii) testes de software, (iii) desenvolvimento orientado a testes (TDD), (iv) cobertura de testes,
+Os conceitos apresentados serão: (i) SQuaRE, (ii) testes de software, (iii) desenvolvimento orientado a testes (TDD), (iv) cobertura de testes,
 (v) análise estática e (vi) a ferramenta SonarQube, utilizada no processo de avaliação.
 
-\section{SonarQube}
+\section{SQuaRE}
 
-O SonarQube é uma plataforma de gerenciamento automático da qualidade e análise de segurança de código.
-Ele permite que organizações e indivíduos revisem, monitorem e melhorem a qualidade do código-fonte dos seus projetos,
-identificando problemas como \textit{bugs}, vulnerabilidades e \textit{code smells}, oferecendo medidas para segurança, manutenibilidade, confiabilidade e outros.
-A ferramenta também oferece métricas como cobertura de testes, complexidade ciclomática, complexidade cognitiva e duplicidade de código.
-É uma plataforma web robusta, com suporte multilíngue, integração com diversas ferramentas de desenvolvimento e versionamento como GitHub, Jenkins e GitLab,
-com capacidade de personalização das regras de análise~\cite{sonarqube}.
+Nascida da junção e revisão de duas normas antigas, a ISO/IEC 9126 (qualidade do produto de software) e a ISO/IEC 14598 (avaliação do produto de software),
+ambas que possuíam uma normativa complementar uma a outra, mas sofriam pelos ciclos de vida diferentes entre elas, o que criava inconsistências.
 
-Utilizamos a plataforma para gerar um relatório completo do repositório \textit{interface-web} do AgroMart; com ele, podemos explorar as métricas do repositório de forma visual e quantitativa,
-observando quais estão positivas e negativas. Assim podemos entender onde se encontram os problemas do projeto e definirmos em qual focar.
+A série ISO/IEC 25000, também denominada SQuaRE, auxilia aqueles desenvolvendo ou adquirindo sistemas e software, ela fornece termos, definições, modelos de referência e guias gerais para requisitos de qualidade.
+Essa é composta por cinco divisões, sendo essas, gerenciamento, modelos, medidas, requisitos e avaliação de qualidade e uma extra para possíveis extensões.
 
-\section{Características de qualidade em código}
+\subsection{ISO/IEC 2501n - Divisão de modelos de qualidade}
 
-De acordo com a ISO/IEC 25010, a qualidade de software pode ser avaliada por meio de características como
-adequação funcional, eficiência de desempenho, compatibilidade, usabilidade, confiabilidade, segurança, manutenibilidade e portabilidade. Portanto podemos concluir que
-a qualidade de software não é unilateral e varia de ponto de vista e de acordo com o contexto em que o software é utilizado.
+Essa seção apresenta modelos de qualidade detalhados para produtos, qualidade em uso e dados, conta também com guias práticos para o uso dos mesmos modelos.
+É nessa divisão que se encontra a ISO/IEC 25010, principal norma utilizada neste trabalho, responsável por definir as características e subcaracterísticas de qualidade de produto de software.
+
+De acordo com a ISO/IEC 25010, a qualidade de software pode ser avaliada por meio de nove características chave:
+adequação funcional, eficiência de desempenho, compatibilidade, usabilidade, confiabilidade, segurança, proteção, manutenibilidade e portabilidade.
+Portanto, podemos concluir que a qualidade de software não é unilateral e varia de ponto de vista e de acordo com o contexto em que o software é utilizado.
 Neste trabalho, a característica mais relacionada é a manutenibilidade, pois ela se associa à facilidade de compreender, modificar e testar o código-fonte~\cite{iso25010}.
 
-Segundo McConnell, a qualidade de código pode ser dividida em duas categorias: Qualidade Externa e Qualidade Interna.
+A norma ainda subdivide cada característica em subcaracterísticas mais específicas. No caso da manutenibilidade, essas subcaracterísticas são: modularidade, reusabilidade, analisabilidade, modificabilidade e testabilidade.
+Testabilidade é definida como o grau de eficácia e eficiência com que critérios de teste podem ser estabelecidos para um sistema, produto ou componente, e com que testes podem ser realizados para determinar se esses critérios foram atendidos.
+Por representar diretamente a capacidade de um software ser verificado por meio de testes automatizados, a testabilidade é a subcaracterística de maior relevância para este trabalho, servindo de ponte entre o modelo de qualidade da ISO/IEC 25010 e a métrica de cobertura de testes explorada nas seções seguintes~\cite{iso25010}.
+
+Complementando a visão normativa da ISO/IEC 25010, McConnell propõe uma categorização mais pragmática da qualidade de código, dividindo-a em duas categorias: Qualidade Externa e Qualidade Interna.
 Qualidade Externa trata da percepção do usuário final sobre o software, ela vem de uma visão de fora sem conhecimento de código-fonte.
 Esse tipo de qualidade é medida por meio de testes de aceitação, controle de qualidade e comentários dos usuários.
 Qualidade Interna se relaciona a percepção do desenvolvedor sobre o software, aquele que tem conhecimento do código-fonte
@@ -31,12 +34,37 @@ e vê os elementos que não são aparentes ao usuário. Seus aspectos de qualida
 permitindo um cálculo quantitativo da qualidade do software. Neste trabalho, o foco está na capacidade de verificação do
 código por meio de testes automatizados e de métricas de cobertura~\cite{mcconnell2004code}.
 
+\subsection{ISO/IEC 2502n - Divisão de medidas de qualidade}
+
+As normas que compõem essa divisão incluem um modelo de referência para medição da qualidade de sistemas e produtos de software, definições matemáticas para as medidas de qualidade e orientação prática para aplicações.
+Enquanto a divisão de modelos (2501n) define o que deve ser avaliado, a divisão de medidas define como calcular numericamente cada característica ou subcaracterística.
+É nesse contexto que métricas utilizadas por ferramentas de análise estática, como cobertura de testes, complexidade ciclomática e duplicidade de código, encontram fundamentação dentro da série SQuaRE, ainda que ferramentas comerciais como o SonarQube não sigam necessariamente as definições matemáticas exatas propostas pela norma~\cite{iso25000guide}.
+
+\subsection{ISO/IEC 2503n - Divisão de requisitos de qualidade}
+
+Essa divisão auxilia na especificação de requisitos de qualidade para um sistema ou produto de software, a partir das necessidades de partes interessadas (\textit{stakeholders}).
+Trata-se de uma etapa anterior à avaliação, na qual são definidos quais níveis de qualidade são esperados antes de qualquer medição ser realizada.
+Embora este trabalho não formalize requisitos de qualidade seguindo essa divisão de forma explícita, o nível mínimo de cobertura de testes definido como meta ao longo da proposta cumpre um papel equivalente, funcionando como um requisito de qualidade estabelecido previamente à execução das medições~\cite{iso25000guide}.
+
+\subsection{ISO/IEC 2504n - Divisão de avaliação da qualidade}
+
+As normas dessa divisão fornecem requisitos, recomendações e diretrizes para a avaliação de produtos de software, seja essa avaliação conduzida por avaliadores independentes, pelos próprios desenvolvedores ou por qualquer parte interessada.
+Também é nessa divisão que se define o conceito de Módulo de Avaliação, uma forma padronizada de documentar como uma medida específica deve ser avaliada.
+No contexto deste trabalho, essa divisão se relaciona diretamente com o uso do SonarQube como ferramenta de avaliação automatizada, atuando como o avaliador que aplica as medidas definidas na divisão 2502n sobre o código do AgroMart Web~\cite{iso25000guide}.
+
+\subsection{ISO/IEC 25050-25099 - Divisão de extensão}
+
+Por fim, a divisão de extensão é destinada a normas e relatórios técnicos que tratam de domínios de aplicação específicos, ou que complementam uma ou mais normas já existentes na série SQuaRE.
+Diferentemente das demais divisões, ela não possui um escopo temático fixo, servindo como espaço para a evolução contínua da série conforme novas necessidades de avaliação de qualidade surgem.
+Este trabalho não faz uso direto de normas dessa divisão, mas sua existência reforça o caráter modular e extensível da série SQuaRE~\cite{iso25000guide}.
+
+
 % Apresentar os atributos que tornam um código mais legível, manutenível,
 % consistente e menos propenso a falhas. Nesta seção, também devem ser
 % abordadas métricas que ajudam a observar a qualidade do código de forma
 % objetiva.
 
-\subsection{Testes de software}
+\section{Testes de software}
 O teste de software tem como intuito executar o programa ou modelo utilizando algumas entradas em particular e verificar se
 seu comportamento está de acordo com o esperado. Caso a execução apresente resultados não especificados, dizemos que um erro ou defeito
 foi identificado. Além disso, os dados de tal execução podem servir como fonte de informação para a localização e a correção de tais defeitos~\cite{delamaro2007}.
@@ -59,6 +87,14 @@ definir e verificar todos os atributos associados e colocar a função sob todos
 Para este trabalho os testes funcionais são de extrema importância, visto que a cobertura de testes é preenchida principalmente por eles.
 Com isso em mente, faremos uma análise de o que e onde os testes do projeto cobrem e como podemos melhorar e ajustar o necessário.
 
+\subsection{Testes estruturais}
+
+Diferentemente do teste funcional, o teste estrutural, também chamado de teste de caixa-branca, utiliza o conhecimento da estrutura interna do código-fonte para projetar os casos de teste.
+Nessa abordagem, o objetivo é exercitar caminhos específicos de execução do programa, como comandos, decisões (\textit{branches}) ou condições, a partir da análise do próprio código~\cite{delamaro2007}.
+
+É essa perspectiva estrutural que fundamenta as métricas de cobertura de testes: ao contrário do teste funcional, que avalia se o comportamento observável está correto, o teste estrutural permite quantificar exatamente quais partes do código foram ou não exercitadas durante a execução da suíte de testes~\cite{myers2011art}.
+
+
 \subsection{Desenvolvimento orientado a testes}
 
 O Desenvolvimento Orientado a Testes, do inglês \textit{Test-Driven Development} (TDD), é uma abordagem de desenvolvimento de software na qual a escrita dos testes é feita antes da implementação do código.
@@ -77,17 +113,40 @@ A ausência dessa prática significa que as unidades foram implementadas sem tes
 \subsection{Cobertura de testes}
 
 Podemos definir cobertura de teste pelo número de comandos executados pelos testes dividido pelo total de comandos do programa.
-Essa fórmula nos dá o percentual de comandos testados em um programa, ou seja, é a métrica que nos ajuda a definir o número de testes que precisamos escrever para um software.~\cite{valente2020engenharia}.
+Essa fórmula nos dá o percentual de comandos testados em um programa, ou seja, é a métrica que nos ajuda a definir o número de testes que precisamos escrever para um software~\cite{valente2020engenharia}.
+
+O SonarQube, em contrapartida, decompõe a cobertura em métricas mais específicas antes de chegar a um valor único.
+A cobertura de linha avalia, para cada linha de código, se ela foi executada ao menos uma vez durante a execução dos testes:
+\begin{equation}
+\textit{line\_coverage} = \frac{LC}{EL}
+\label{eq:lineCoverage}
+\end{equation}
+em que $LC$ representa o número de linhas cobertas (linhas a cobrir menos linhas não cobertas) e $EL$ o total de linhas executáveis do código-fonte~\cite{sonarqube_metricdefs,gallaba_sonarmetrics}.
+
+Já a cobertura de condição avalia, em cada linha de código que contenha uma expressão booleana, se essa expressão foi avaliada tanto como verdadeira quanto como falsa ao longo da execução dos testes:
+\begin{equation}
+\textit{condition\_coverage} = \frac{CT + CF}{2B}
+\label{eq:conditionCoverage}
+\end{equation}
+em que $CT$ e $CF$ representam, respectivamente, o número de condições avaliadas como verdadeiras e como falsas ao menos uma vez, e $B$ o total de condições presentes no código~\cite{sonarqube_metricdefs,gallaba_sonarmetrics}.
+
+Por fim, a métrica de cobertura exibida pelo SonarQube como resultado final combina as duas métricas anteriores, oferecendo uma resposta mais precisa sobre a extensão com que o código-fonte foi exercitado pelos testes:
+\begin{equation}
+coverage = \frac{CT + LC}{B + EL}
+\label{eq:coverageSonar}
+\end{equation}
+onde CT são as condições que foram avaliadas como verdadeiras pelo menos uma vez, LC são a quantidade de linhas cobertas (linhas a cobrir - linhas não cobertas),
+B é o número total de condições e EL é o número de linhas executáveis (linhas a cobrir)~\cite{sonarqube_metricdefs}.
 
 %Cobertura de testes é uma métrica que ajuda a definir o número de testes que precisamos escrever para um programa.
 %Ela mede o percentual de comandos de um programa que são cobertos por testes, isto é:
 %cobertura de testes = (número de comandos executados pelos testes) / (total de comandos do programa)~\cite{valente2020engenharia}
 
-Não existe número mágico ideal para a cobertura e tão pouco é esperado que um projeto alcançe os 100\%.
+Não existe número mágico ideal para a cobertura e tão pouco é esperado que um projeto alcance os 100\%.
 A resposta de quanto um projeto precisa atender varia de projeto a projeto e nunca é um valor fixo,
 ele depende de diversos fatores como a complexidade dos requisitos, quão crítico é, datas de entrega, entre outros.
 Também deve-se monitorar a evolução dos valores de cobertura e verificar código não testado para entender se é relevante
-e se não possui uma dificuldade alta de testar, com isso pesar se deve ser ignorado.~\cite{valente2020engenharia}.
+e se não possui uma dificuldade alta de testar, com isso pesar se deve ser ignorado~\cite{valente2020engenharia}.
 
 %De acordo com a literatura, essa resposta varia de projeto para projeto e depende de vários fatores, como complexidade dos requisitos, criticidade do projeto, etc.
 %Ao invés de ter um valor fixo, deve-se monitorar a evolução dos valores de cobertura ao longo do tempo e verificar trexos do código
@@ -95,11 +154,19 @@ e se não possui uma dificuldade alta de testar, com isso pesar se deve ser igno
 
 Dito isso, cobertura de testes não é o mesmo que qualidade de testes, é muito fácil alcançar uma cobertura alta com testes de baixa qualidade.
 Por exemplo, testes que buscam por erros que não acontecem com frequência tem pouco impacto na qualidade do código, mas podem ser utilizados para subir a porcentagem de cobertura do código,
-por isso é preciso criar testes que sejam bem pensados e mais relevantes para a qualidade do código.~\cite{fowler2012test}.
+por isso é preciso criar testes que sejam bem pensados e mais relevantes para a qualidade do código~\cite{fowler2012test}.
 
-O SonarQube tem como padrão uma cobertura mínima de 80\%. Não há pesquisas ou análises externas que expliquem o porquê da escolha,
-assumo pessoalmente que foi adotado como um valor padrão por representar a alta cobertura do código e por se repetir em divérsos outros programas.
-Devido a isso, esse foi o valor escolhido como base para o trabalho, por recomendação do próprio progama, e que será referência quando for citado como valor alvo.
+O SonarQube adota, por padrão, o \textit{quality gate} denominado \textit{Sonar way}, recomendado pela própria ferramenta e definido como \textit{built-in} e somente leitura.
+Esse \textit{quality gate} segue a abordagem \textit{Clean as You Code}, segundo a qual o foco da avaliação de qualidade deve estar no código \textbf{novo} ou modificado, e não na totalidade do código já existente no repositório~\cite{sonarqube_qualitygates}.
+Entre suas condições, a mais relevante para este trabalho é a exigência de que a cobertura de testes do código novo seja igual ou superior a 80\%~\cite{sonarqube_qualitygates}.
+
+A documentação oficial justifica essa escolha pela constatação de que concentrar esforço na manutenção de um alto padrão de qualidade sobre código recém-escrito é mais sustentável do que exigir a remediação retroativa de todo o código legado de uma só vez~\cite{sonarqube_qualitygates}.
+Nesse sentido, a própria ferramenta recomenda cautela ao aplicar o mesmo limiar de 80\% sobre o código completo (\textit{overall code}) em bases legadas, já que padrões retroativos rígidos podem tornar o \textit{quality gate} permanentemente reprovado, bloqueando o fluxo de desenvolvimento até que uma refatoração significativa seja concluída~\cite{sonarsource_netguide}.
+
+No caso do AgroMart Web, entretanto, o problema identificado não é um código novo mal testado, mas sim um déficit acumulado de cobertura em praticamente todo o código já existente.
+Por esse motivo, este trabalho opta por utilizar o valor de 80\% como referência de cobertura \textbf{global} do repositório, e não apenas do código novo, divergindo conscientemente da aplicação padrão recomendada pelo \textit{Sonar way}.
+Essa divergência se justifica pela natureza do problema abordado: trata-se de uma dívida técnica pré-existente, e não de uma preocupação com a qualidade de contribuições futuras ao código.
+O valor de 80\% é mantido como referência numérica por ser o padrão de mercado adotado pela ferramenta e reconhecido na literatura como um nível de cobertura considerado aceitável em contextos tradicionais de desenvolvimento~\cite{valente2020engenharia}.
 
 % A cobertura de testes indica a proporção do código exercitada pelos testes
 % automatizados. Ela não garante ausência de defeitos, mas ajuda a identificar
@@ -108,7 +175,7 @@ Devido a isso, esse foi o valor escolhido como base para o trabalho, por recomen
 \section{Análise estática}
 
 A análise estática faz a busca por erros comuns no código-fonte, sendo esses erros já estudados e que ocorrem com frequência,
-sendo capaz de procurar por esses erros sem executar o código, exatamente por se basear na previsibilidade deles.~\cite{louridas2006}.
+sendo capaz de procurar por esses erros sem executar o código, exatamente por se basear na previsibilidade deles~\cite{louridas2006}.
 
 É a partir dela que avaliamos o código identificando problemas de qualidade, manutenção e confiabilidade de forma antecipada.
 No contexto deste trabalho, ela atua como apoio ao diagnóstico da cobertura de testes,
@@ -118,3 +185,45 @@ fornecendo indicadores que orientam a priorização de melhorias.
 % usada para apoiar a avaliação da qualidade do código, especialmente na
 % verificação de cobertura de testes, complexidade ciclomática e complexidade
 % cognitiva.
+
+\section{SonarQube}
+
+O SonarQube é uma plataforma de gerenciamento automático da qualidade e análise de segurança de código.
+Ele permite que organizações e indivíduos revisem, monitorem e melhorem a qualidade do código-fonte dos seus projetos,
+identificando problemas como \textit{bugs}, vulnerabilidades e \textit{code smells}, oferecendo medidas para segurança, manutenibilidade, confiabilidade e outros.
+A ferramenta também oferece métricas como cobertura de testes, complexidade ciclomática, complexidade cognitiva e duplicidade de código.
+É uma plataforma web robusta, com suporte multilíngue, integração com diversas ferramentas de desenvolvimento e versionamento como GitHub, Jenkins e GitLab,
+com capacidade de personalização das regras de análise~\cite{sonarqube}.
+
+Utilizamos a plataforma para gerar um relatório completo do repositório \textit{interface-web} do AgroMart; com ele, podemos explorar as métricas do repositório de forma visual e quantitativa,
+observando quais estão positivas e negativas. Assim podemos entender onde se encontram os problemas do projeto e definirmos em qual focar.
+
+
+\subsection{Relação entre o SonarQube e a ISO/IEC 25010}
+
+Ao relacionar as métricas apresentadas pelo SonarQube com o modelo de qualidade da ISO/IEC 25010, é possível observar que a ferramenta concentra sua capacidade de avaliação em apenas três das nove características definidas pela norma: confiabilidade, segurança e, principalmente, manutenibilidade, sendo essa última a mais representada, por meio de métricas como complexidade ciclomática, complexidade cognitiva, duplicidade de código e cobertura de testes, com destaque para a subcaracterística de testabilidade, diretamente associada à cobertura de testes e ao foco deste trabalho~\cite{iso25010,sonarqube}.
+
+Essa concentração vem da natureza estática da análise realizada pela ferramenta: por não executar o software em condições reais de uso, o SonarQube não é capaz de avaliar características como adequação funcional, eficiência de desempenho, compatibilidade, usabilidade, proteção e portabilidade, uma vez que a verificação dessas características depende de testes dinâmicos, avaliação humana ou execução em múltiplos ambientes~\cite{iso25010}.
+
+Dessa forma, o recorte deste trabalho em torno da manutenibilidade e, mais especificamente, da testabilidade, não decorre de uma escolha arbitrária, mas do próprio limite de alcance da ferramenta de diagnóstico utilizada, o que reforça a necessidade de se interpretar os resultados do SonarQube como uma medida parcial, e não integral, da qualidade de um produto de software.
+
+\begin{table}[htb]
+    \centering
+    \caption{Relação entre as métricas do SonarQube e as características/subcaracterísticas da ISO/IEC 25010}
+    \label{tab:metricas-iso25010}
+    \begin{tabular}{p{4cm}p{3.5cm}p{5cm}}
+        \hline
+        \textbf{Métrica do SonarQube} & \textbf{Característica} & \textbf{Subcaracterística} \\
+        \hline
+        Bugs / \textit{Reliability Rating} & Confiabilidade & Maturidade \\
+        Vulnerabilities / \textit{Security Rating} & Segurança & Confidencialidade / Integridade \\
+        Security Hotspots / \textit{Security Review Rating} & Segurança & Não repúdio / Responsabilização \\
+        Code Smells & Manutenibilidade & Modificabilidade \\
+        Complexidade Ciclomática & Manutenibilidade & Analisabilidade \\
+        Complexidade Cognitiva & Manutenibilidade & Analisabilidade / Modificabilidade \\
+        Linhas/Blocos Duplicados & Manutenibilidade & Reusabilidade \\
+        Cobertura de Testes & Manutenibilidade & Testabilidade \\
+        \textit{Technical Debt Ratio} / \textit{Maintainability Rating} & Manutenibilidade & Síntese das subcaracterísticas anteriores \\
+        \hline
+    \end{tabular}
+\end{table}
