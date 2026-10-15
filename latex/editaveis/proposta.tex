@@ -52,5 +52,70 @@ Terceiro, avalia-se continuamente o efeito das intervenções nas métricas de q
 Quarto, consolida-se a documentação de desenvolvimento para transformar o ganho pontual em prática recorrente no projeto.
 Com essa ordem, a proposta busca aumentar a cobertura de forma sustentável em todo o projeto, com ganhos progressivos para a qualidade do AgroMart Web.
 
+\subsection{Critérios de priorização das unidades}
+
+A ordem de implementação dos testes parte dos dados de cobertura extraídos do SonarQube para cada arquivo do repositório, na linha de base coletada em 15 de outubro de 2026.
+Para cada arquivo, considerou-se a soma de linhas e condições não cobertas por testes, já que são esses os dois elementos que compõem a métrica de cobertura calculada pela ferramenta (Equação~\ref{eq:coverageSonar}).
+
+Ordenar os arquivos apenas por essa soma, no entanto, colocaria no início da fila as páginas da aplicação, que concentram a maior quantidade de código não coberto, mas também são as unidades mais custosas de testar, por dependerem ao mesmo tempo do gerenciamento de estado, das rotas e da comunicação com a API.
+Por isso, os arquivos foram organizados em três grupos, de acordo com sua camada na arquitetura da aplicação, e serão testados nesta ordem:
+
+\begin{enumerate}
+	\item \textbf{Lógica em JavaScript}: módulos de gerenciamento de estado (\textit{stores} do Pinia), serviços de comunicação com a API, utilitários e configuração de rotas. Por conterem lógica sem dependência da interface, permitem testes unitários isolados e concentram parte relevante da complexidade do projeto, além de funções críticas como a autenticação. As simulações criadas nesta etapa, como a da API, poderão ser reaproveitadas nas etapas seguintes;
+	\item \textbf{Componentes}: componentes reutilizáveis da interface, começando pelos formulários, que apresentam o maior número de condições não cobertas;
+	\item \textbf{Páginas}: telas completas da aplicação, que combinam componentes, estado e rotas, testadas por último por exigirem o maior número de dependências simuladas.
+\end{enumerate}
+
+Dentro de cada grupo, os arquivos foram ordenados pela soma de linhas e condições não cobertas, da maior para a menor.
+Ao todo, são 3.287 elementos não cobertos, dos quais 846 (26\%) estão no grupo de lógica, 865 (26\%) nos componentes e 1.576 (48\%) nas páginas.
+A Tabela~\ref{tab:priorizacao} apresenta a ordem resultante.
+
+\begin{table}[htb]
+	\centering
+	\footnotesize
+	\caption{Ordem de priorização dos arquivos para implementação de testes}
+	\label{tab:priorizacao}
+	\begin{tabular}{clrrrr}
+		\hline
+		\textbf{Ordem} & \textbf{Arquivo (em \texttt{src/})} & \textbf{Linhas} & \textbf{Condições} & \textbf{Total} & \textbf{Compl. cognitiva} \\
+		\hline
+		\multicolumn{6}{l}{\textit{Grupo 1 -- Lógica em JavaScript}} \\
+		1 & \texttt{utils/performance.js} & 128 & 47 & 175 & 38 \\
+		2 & \texttt{utils/offline.js} & 105 & 37 & 142 & 30 \\
+		3 & \texttt{store/auth.js} & 100 & 20 & 120 & 10 \\
+		4 & \texttt{store/baskets.js} & 85 & 13 & 98 & 12 \\
+		5 & \texttt{store/products.js} & 85 & 13 & 98 & 12 \\
+		6 & \texttt{services/api.js} & 72 & 21 & 93 & 8 \\
+		7 & \texttt{store/stores.js} & 59 & 19 & 78 & 13 \\
+		8 & \texttt{store/app.js} & 15 & 2 & 17 & 0 \\
+		9 & \texttt{router/index.js} & 15 & 0 & 15 & 8 \\
+		10 & \texttt{services/products.js} & 8 & 1 & 9 & 0 \\
+		11 & \texttt{store/index.js} & 1 & 0 & 1 & 0 \\
+		\hline
+		\multicolumn{6}{l}{\textit{Grupo 2 -- Componentes}} \\
+		12 & \texttt{components/BasketForm.vue} & 107 & 79 & 186 & 23 \\
+		13 & \texttt{components/ProductForm.vue} & 92 & 68 & 160 & 15 \\
+		14 & \texttt{components/DeliverySelection.vue} & 77 & 48 & 125 & 17 \\
+		15 & \texttt{components/BasketCard.vue} & 67 & 48 & 115 & 7 \\
+		16 & \texttt{components/ProductCard.vue} & 58 & 40 & 98 & 6 \\
+		17 & \texttt{layouts/DefaultLayout.vue} & 66 & 22 & 88 & 1 \\
+		18 & \texttt{App.vue} & 43 & 20 & 63 & 1 \\
+		19 & \texttt{components/LoadingCard.vue} & 15 & 0 & 15 & 0 \\
+		20 & \texttt{components/HelloWorld.vue} & 7 & 2 & 9 & 0 \\
+		21 & \texttt{components/EmptyState.vue} & 3 & 3 & 6 & 0 \\
+		\hline
+		\multicolumn{6}{l}{\textit{Grupo 3 -- Páginas}} \\
+		22 & \texttt{pages/ProfilePage.vue} & 198 & 128 & 326 & 9 \\
+		23 & \texttt{pages/StorePage.vue} & 161 & 129 & 290 & 19 \\
+		24 & \texttt{pages/LoginPage.vue} & 144 & 108 & 252 & 8 \\
+		25 & \texttt{pages/OrdersPage.vue} & 139 & 64 & 203 & 7 \\
+		26 & \texttt{pages/BasketsPage.vue} & 118 & 58 & 176 & 11 \\
+		27 & \texttt{pages/HomePage.vue} & 108 & 68 & 176 & 0 \\
+		28 & \texttt{pages/ProductsPage.vue} & 96 & 57 & 153 & 11 \\
+		\hline
+	\end{tabular}
+	\fonte{Elaborado pelo autor a partir de dados do SonarCloud coletados em 15/10/2026. Linhas e condições indicam os elementos não cobertos por testes.}
+\end{table}
+
 %Organizar as ações por ordem de impacto ou urgência, facilitando a execução
 %da proposta.

@@ -65,11 +65,21 @@ Este trabalho não faz uso direto de normas dessa divisão, mas sua existência 
 % objetiva.
 
 \section{Testes de software}
-O teste de software tem como intuito executar o programa ou modelo utilizando algumas entradas em particular e verificar se
-seu comportamento está de acordo com o esperado. Caso a execução apresente resultados não especificados, dizemos que um erro ou defeito
-foi identificado. Além disso, os dados de tal execução podem servir como fonte de informação para a localização e a correção de tais defeitos~\cite{delamaro2007}.
 
-Podem também ser divididos em três fases, que podemos estabelecer como: testes de unidade, de integração e de sistemas.
+\citeonline{delamaro2007} descrevem o teste de software como uma atividade dinâmica: o programa é executado com certas entradas escolhidas e o comportamento resultante é comparado ao que se esperava dele.
+Quando há divergência entre o esperado e o resultado, tem-se a evidência de um defeito, e as informações registradas durante a execução passam a ajudar na busca por sua origem e sua correção.
+
+%O teste de software tem como intuito executar o programa ou modelo utilizando algumas entradas em particular e verificar se
+%seu comportamento está de acordo com o esperado. Caso a execução apresente resultados não especificados, dizemos que um erro ou defeito
+%foi identificado. Além disso, os dados de tal execução podem servir como fonte de informação para a localização e a correção de tais defeitos~\cite{delamaro2007}.
+
+Para a organização dos testes, alguns termos são recorrentes na área de teste.
+Cada entrada escolhida para o programa é chamada de dado de teste, junto ao resultado que se espera obter com ela se forma um caso de teste.
+Os casos de teste reunidos para uma determinada atividade se tornam o conjunto de teste, também referido neste trabalho como suíte de testes.
+Dizemos que o ``oráculo'' é o que julga se a saída do teste é correta, se ela corresponde à esperada, em geral, esse papel cabe a pessoa testando, que se apoia na especificação do programa para tomar essa decisão~\cite{delamaro2007}.
+Em testes automatizados, como os escritos neste trabalho, esse julgamento fica registrado nas asserções do próprio teste.
+
+Testes também podem ser divididos em três fases, que podemos estabelecer como: testes de unidade, de integração e de sistemas.
 O teste de unidade foca nas menores unidades do programa, como funções, procedimentos, métodos e classes.
 O teste de integração tem ênfase na construção da estrutura do sistema, verificando a integração entre partes do código.
 Por fim o teste de sistemas avalia o sistema completo, verificando se as funcionalidades especificadas nos documentos de requisitos estão implementadas corretamente~\cite{valente2020engenharia}.
@@ -78,8 +88,11 @@ Para a análise feita no Agromart focamos na fase de testes de unidade, utilizad
 
 \subsection{Testes funcionais}
 
-Teste funcional, é uma técnica utilizada para se projetar casos de teste no qual o programa ou sistema é considerado uma caixa preta e,
-para testá-lo, são fornecidas entradas e avaliadas as saídas geradas para verificar se estão em conformidade com os objetivos especificados~\cite{delamaro2007}.
+No teste funcional, os casos de teste são derivados apenas da especificação: o programa é tratado como uma caixa-preta,
+em que o funcionamento interno não é levado em conta, e a verificação consiste em comparar as saídas produzidas para cada entrada com o comportamento esperado~\cite{delamaro2007}.
+
+%Teste funcional, é uma técnica utilizada para se projetar casos de teste no qual o programa ou sistema é considerado uma caixa preta e,
+%para testá-lo, são fornecidas entradas e avaliadas as saídas geradas para verificar se estão em conformidade com os objetivos especificados~\cite{delamaro2007}.
 
 Quando se está testando funções, deve-se projetar testes que cubram todos os aspectos do objeto, ou seja, testar todas as operações,
 definir e verificar todos os atributos associados e colocar a função sob todos os possíveis estados, isso é, testar tanto sucesso quanto falhas e qualquer evento que cause uma mudança de estado~\cite{sommerville2011software}.
@@ -89,8 +102,11 @@ Com isso em mente, faremos uma análise de o que e onde os testes do projeto cob
 
 \subsection{Testes estruturais}
 
-Diferentemente do teste funcional, o teste estrutural, também chamado de teste de caixa-branca, utiliza o conhecimento da estrutura interna do código-fonte para projetar os casos de teste.
-Nessa abordagem, o objetivo é exercitar caminhos específicos de execução do programa, como comandos, decisões (\textit{branches}) ou condições, a partir da análise do próprio código~\cite{delamaro2007}.
+O teste estrutural, ou de caixa-branca, segue o caminho oposto ao teste funcional: em vez da especificação, é o próprio código-fonte que orienta a escolha dos casos de teste.
+A partir da análise da implementação, identificam-se os comandos, desvios condicionais e condições que precisam ser exercitados, e com base nesses elementos que se criam os critérios de teste~\cite{delamaro2007}.
+
+%Diferentemente do teste funcional, o teste estrutural, também chamado de teste de caixa-branca, utiliza o conhecimento da estrutura interna do código-fonte para projetar os casos de teste.
+%Nessa abordagem, o objetivo é exercitar caminhos específicos de execução do programa, como comandos, decisões (\textit{branches}) ou condições, a partir da análise do próprio código~\cite{delamaro2007}.
 
 É essa perspectiva estrutural que fundamenta as métricas de cobertura de testes: ao contrário do teste funcional, que avalia se o comportamento observável está correto, o teste estrutural permite quantificar exatamente quais partes do código foram ou não exercitadas durante a execução da suíte de testes~\cite{myers2011art}.
 
