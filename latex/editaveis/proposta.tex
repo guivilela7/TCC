@@ -1,7 +1,7 @@
 \chapter{Proposta}
 
 Este capítulo apresenta a proposta de melhoria para o repositório \textit{interface-web} do AgroMart,
-elaborada a partir dos resultados obtidos na análise estática do repositório derivadas da ferramenta SonarQube.
+elaborada a partir dos resultados da análise estática do repositório realizada com a ferramenta SonarQube.
 O objetivo é definir ações para elevar a qualidade interna do código, com foco em prevenção de falhas e ampliação consistente da cobertura de testes.
 A proposta adota uma abordagem orientada por diagnóstico, iniciando com análise global do projeto no SonarQube para definição da linha de base das métricas.
 Com esse diagnóstico, as intervenções passam a priorizar unidades fundamentais da aplicação, buscando ampliar a cobertura de forma progressiva e mensurável até um nível mínimo considerado adequado para apoiar manutenção e evolução.
@@ -19,9 +19,9 @@ Com esse diagnóstico, as intervenções passam a priorizar unidades fundamentai
 
 \section{Problemas identificados}
 
-Após análise via SonarQube, o principal problema identificado é a baixa cobertura de testes em código-fonte.
-Também é notável a presença de alguns \textit{code smells}, mas esses somam apenas trinta, o que o SonarQube categoriza como algo aceitável e estamos de acordo com a análise,
-além disso, também são apontados dois pontos de possível falha de segurança, que após análise mais detalhada, foram classificados como falsos positivos e descartados.
+Após análise via SonarQube, o principal problema identificado é a baixa cobertura de testes no código-fonte.
+A ferramenta também aponta trinta \textit{code smells}, quantidade que mantém o projeto com classificação A em manutenibilidade e razão de dívida técnica de 0,2\%, motivo pelo qual não foram tratados como prioridade nesta proposta.
+Além disso, foram indicados dois \textit{security hotspots}, trechos de código que exigem revisão manual quanto à segurança, os quais, após análise, foram considerados falsos positivos.
 
 Dessa forma, o foco desta proposta está na cobertura de testes do código, visto que essa se encontra em apenas 0,5\%,
 indicando que a maior parte do código está sem testes automatizados.
@@ -34,8 +34,8 @@ Assim, o problema priorizado nesta proposta é a baixa cobertura de testes nas u
 \section{Ações propostas}
 
 As ações propostas estão organizadas em cinco frentes complementares.
-A primeira consiste na configuração e execução de uma análise inicial global no SonarQube para identificar e priorizar os pontos mais críticos de qualidade.
-A segunda consiste no mapeamento das unidades fundamentais do \textit{interface-web}, considerando relevância funcional e risco para manutenção.
+A primeira consiste na configuração e execução de uma análise inicial global no SonarQube, integrada ao GitHub Actions, para identificar e priorizar os pontos mais críticos de qualidade.
+A segunda consiste no mapeamento das unidades do \textit{interface-web} e na definição da ordem em que serão testadas, considerando a quantidade de código não coberto e o custo de testar cada camada da aplicação.
 A terceira consiste na implementação e execução de testes unitários para as unidades selecionadas, ampliando gradualmente a cobertura do código.
 A quarta consiste no acompanhamento da evolução das métricas de cobertura e manutenibilidade no SonarQube, de modo a orientar ciclos contínuos de melhoria.
 A quinta consiste na elaboração de uma documentação de desenvolvimento englobando testes, com orientações de estrutura, padrões de escrita, execução local e em \textit{pipeline}, e critérios mínimos para novas contribuições.
@@ -47,12 +47,13 @@ A quinta consiste na elaboração de uma documentação de desenvolvimento englo
 
 A priorização foi definida por impacto e viabilidade.
 Primeiro, realiza-se o diagnóstico global no SonarQube para construção da linha de base e identificação dos alvos de maior relevância.
-Segundo, concentra-se o esforço na escrita de testes para unidades fundamentais, começando pelas de maior criticidade funcional.
+Segundo, concentra-se o esforço na escrita de testes, seguindo a ordem de unidades definida na Seção~\ref{sec:criterios-priorizacao}.
 Terceiro, avalia-se continuamente o efeito das intervenções nas métricas de qualidade para orientar a expansão incremental dos testes.
 Quarto, consolida-se a documentação de desenvolvimento para transformar o ganho pontual em prática recorrente no projeto.
 Com essa ordem, a proposta busca aumentar a cobertura de forma sustentável em todo o projeto, com ganhos progressivos para a qualidade do AgroMart Web.
 
 \subsection{Critérios de priorização das unidades}
+\label{sec:criterios-priorizacao}
 
 A ordem de implementação dos testes parte dos dados de cobertura extraídos do SonarQube para cada arquivo do repositório, na linha de base coletada em 15 de outubro de 2026.
 Para cada arquivo, considerou-se a soma de linhas e condições não cobertas por testes, já que são esses os dois elementos que compõem a métrica de cobertura calculada pela ferramenta (Equação~\ref{eq:coverageSonar}).

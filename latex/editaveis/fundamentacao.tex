@@ -1,6 +1,6 @@
 \chapter{Fundamentação teórica}
 
-Ao longo deste capitulo será descrito tópicos importantes para o entendimento deste trabalho.
+Ao longo deste capítulo serão descritos tópicos importantes para o entendimento deste trabalho.
 Os conceitos apresentados serão: (i) SQuaRE, (ii) testes de software, (iii) desenvolvimento orientado a testes (TDD), (iv) cobertura de testes,
 (v) análise estática e (vi) a ferramenta SonarQube, utilizada no processo de avaliação.
 
@@ -14,12 +14,11 @@ Essa é composta por cinco divisões, sendo essas, gerenciamento, modelos, medid
 
 \subsection{ISO/IEC 2501n - Divisão de modelos de qualidade}
 
-Essa seção apresenta modelos de qualidade detalhados para produtos, qualidade em uso e dados, conta também com guias práticos para o uso dos mesmos modelos.
+Essa seção da norma apresenta modelos de qualidade detalhados para produtos, qualidade em uso e dados, conta também com guias práticos para o uso dos mesmos modelos.
 É nessa divisão que se encontra a ISO/IEC 25010, principal norma utilizada neste trabalho, responsável por definir as características e subcaracterísticas de qualidade de produto de software.
 
 De acordo com a ISO/IEC 25010, a qualidade de software pode ser avaliada por meio de nove características chave:
-adequação funcional, eficiência de desempenho, compatibilidade, usabilidade, confiabilidade, segurança, proteção, manutenibilidade e portabilidade.
-Portanto, podemos concluir que a qualidade de software não é unilateral e varia de ponto de vista e de acordo com o contexto em que o software é utilizado.
+adequação funcional, eficiência de desempenho, compatibilidade, usabilidade, confiabilidade, segurança, proteção, manutenibilidade e portabilidade. Assim, a qualidade de software não é unilateral: varia conforme o ponto de vista e o contexto em que o software é utilizado.
 Neste trabalho, a característica mais relacionada é a manutenibilidade, pois ela se associa à facilidade de compreender, modificar e testar o código-fonte~\cite{iso25010}.
 
 A norma ainda subdivide cada característica em subcaracterísticas mais específicas. No caso da manutenibilidade, essas subcaracterísticas são: modularidade, reusabilidade, analisabilidade, modificabilidade e testabilidade.
@@ -28,9 +27,9 @@ Por representar diretamente a capacidade de um software ser verificado por meio 
 
 Complementando a visão normativa da ISO/IEC 25010, McConnell propõe uma categorização mais pragmática da qualidade de código, dividindo-a em duas categorias: Qualidade Externa e Qualidade Interna.
 Qualidade Externa trata da percepção do usuário final sobre o software, ela vem de uma visão de fora sem conhecimento de código-fonte.
-Esse tipo de qualidade é medida por meio de testes de aceitação, controle de qualidade e comentários dos usuários.
-Qualidade Interna se relaciona a percepção do desenvolvedor sobre o software, aquele que tem conhecimento do código-fonte
-e vê os elementos que não são aparentes ao usuário. Seus aspectos de qualidade podem ser medidas por métricas de código,
+Esse tipo de qualidade é medido por meio de testes de aceitação, controle de qualidade e comentários dos usuários.
+Qualidade Interna se relaciona à percepção do desenvolvedor sobre o software, aquele que tem conhecimento do código-fonte
+e vê os elementos que não são aparentes ao usuário. Seus aspectos de qualidade podem ser medidos por métricas de código,
 permitindo um cálculo quantitativo da qualidade do software. Neste trabalho, o foco está na capacidade de verificação do
 código por meio de testes automatizados e de métricas de cobertura~\cite{mcconnell2004code}.
 
@@ -74,17 +73,18 @@ Quando há divergência entre o esperado e o resultado, tem-se a evidência de u
 %foi identificado. Além disso, os dados de tal execução podem servir como fonte de informação para a localização e a correção de tais defeitos~\cite{delamaro2007}.
 
 Para a organização dos testes, alguns termos são recorrentes na área de teste.
-Cada entrada escolhida para o programa é chamada de dado de teste, junto ao resultado que se espera obter com ela se forma um caso de teste.
+Cada entrada escolhida para o programa é chamada de dado de teste e, junto ao resultado que se espera obter com ela, forma um caso de teste.
 Os casos de teste reunidos para uma determinada atividade se tornam o conjunto de teste, também referido neste trabalho como suíte de testes.
-Dizemos que o ``oráculo'' é o que julga se a saída do teste é correta, se ela corresponde à esperada, em geral, esse papel cabe a pessoa testando, que se apoia na especificação do programa para tomar essa decisão~\cite{delamaro2007}.
+Chama-se de ``oráculo'' aquilo que julga se a saída do teste é correta, isto é, se ela corresponde à esperada.
+Em geral, esse papel cabe a quem testa, que se apoia na especificação do programa para tomar essa decisão~\cite{delamaro2007}.
 Em testes automatizados, como os escritos neste trabalho, esse julgamento fica registrado nas asserções do próprio teste.
 
-Testes também podem ser divididos em três fases, que podemos estabelecer como: testes de unidade, de integração e de sistemas.
+Testes também podem ser divididos em três fases, que se podem estabelecer como: testes de unidade, de integração e de sistemas.
 O teste de unidade foca nas menores unidades do programa, como funções, procedimentos, métodos e classes.
 O teste de integração tem ênfase na construção da estrutura do sistema, verificando a integração entre partes do código.
 Por fim o teste de sistemas avalia o sistema completo, verificando se as funcionalidades especificadas nos documentos de requisitos estão implementadas corretamente~\cite{valente2020engenharia}.
 
-Para a análise feita no Agromart focamos na fase de testes de unidade, utilizado no cálculo da porcentagem da cobertura de testes do código-fonte.
+Para a análise feita no AgroMart, o foco está na fase de testes de unidade, utilizada no cálculo da porcentagem da cobertura de testes do código-fonte.
 
 \subsection{Testes funcionais}
 
@@ -97,18 +97,21 @@ em que o funcionamento interno não é levado em conta, e a verificação consis
 Quando se está testando funções, deve-se projetar testes que cubram todos os aspectos do objeto, ou seja, testar todas as operações,
 definir e verificar todos os atributos associados e colocar a função sob todos os possíveis estados, isso é, testar tanto sucesso quanto falhas e qualquer evento que cause uma mudança de estado~\cite{sommerville2011software}.
 
-Para este trabalho os testes funcionais são de extrema importância, visto que a cobertura de testes é preenchida principalmente por eles.
-Com isso em mente, faremos uma análise de o que e onde os testes do projeto cobrem e como podemos melhorar e ajustar o necessário.
-
 \subsection{Testes estruturais}
 
 O teste estrutural, ou de caixa-branca, segue o caminho oposto ao teste funcional: em vez da especificação, é o próprio código-fonte que orienta a escolha dos casos de teste.
-A partir da análise da implementação, identificam-se os comandos, desvios condicionais e condições que precisam ser exercitados, e com base nesses elementos que se criam os critérios de teste~\cite{delamaro2007}.
+A partir da análise da implementação, identificam-se os comandos, desvios condicionais e condições que precisam ser exercitados, e é com base nesses elementos que se criam os critérios de teste~\cite{delamaro2007}.
 
 %Diferentemente do teste funcional, o teste estrutural, também chamado de teste de caixa-branca, utiliza o conhecimento da estrutura interna do código-fonte para projetar os casos de teste.
 %Nessa abordagem, o objetivo é exercitar caminhos específicos de execução do programa, como comandos, decisões (\textit{branches}) ou condições, a partir da análise do próprio código~\cite{delamaro2007}.
 
 É essa perspectiva estrutural que fundamenta as métricas de cobertura de testes: ao contrário do teste funcional, que avalia se o comportamento observável está correto, o teste estrutural permite quantificar exatamente quais partes do código foram ou não exercitadas durante a execução da suíte de testes~\cite{myers2011art}.
+
+As duas técnicas não são excludentes e, neste trabalho, são empregadas de forma complementar.
+Os testes escritos são testes de unidade, e cada caso de teste é derivado do comportamento esperado da unidade, verificando cenários de sucesso, de falha e de mudança de estado, como no teste funcional.
+Como o projeto não dispõe de uma especificação formal de requisitos, o comportamento esperado de cada unidade é inferido a partir do próprio código, da interface e do uso da aplicação.
+Já a escolha de quais unidades e caminhos testar é orientada pelo critério estrutural: as linhas e condições não exercitadas, apontadas pelo SonarQube, indicam onde faltam casos de teste.
+Cabe destacar que a cobertura medida é sempre estrutural, independentemente da técnica usada para projetar os casos: ela registra quais partes do código foram executadas pela suíte de testes, mas não se os resultados verificados estavam corretos.
 
 
 \subsection{Desenvolvimento orientado a testes}
@@ -128,8 +131,8 @@ A ausência dessa prática significa que as unidades foram implementadas sem tes
 
 \subsection{Cobertura de testes}
 
-Podemos definir cobertura de teste pelo número de comandos executados pelos testes dividido pelo total de comandos do programa.
-Essa fórmula nos dá o percentual de comandos testados em um programa, ou seja, é a métrica que nos ajuda a definir o número de testes que precisamos escrever para um software~\cite{valente2020engenharia}.
+Pode-se definir cobertura de teste pelo número de comandos executados pelos testes dividido pelo total de comandos do programa.
+Essa fórmula dá o percentual de comandos testados em um programa, ou seja, é a métrica que ajuda a definir o número de testes que precisam ser escritos para um software~\cite{valente2020engenharia}.
 
 O SonarQube, em contrapartida, decompõe a cobertura em métricas mais específicas antes de chegar a um valor único.
 A cobertura de linha avalia, para cada linha de código, se ela foi executada ao menos uma vez durante a execução dos testes:
@@ -158,7 +161,7 @@ B é o número total de condições e EL é o número de linhas executáveis (li
 %Ela mede o percentual de comandos de um programa que são cobertos por testes, isto é:
 %cobertura de testes = (número de comandos executados pelos testes) / (total de comandos do programa)~\cite{valente2020engenharia}
 
-Não existe número mágico ideal para a cobertura e tão pouco é esperado que um projeto alcance os 100\%.
+Não existe número mágico ideal para a cobertura e tampouco é esperado que um projeto alcance os 100\%.
 A resposta de quanto um projeto precisa atender varia de projeto a projeto e nunca é um valor fixo,
 ele depende de diversos fatores como a complexidade dos requisitos, quão crítico é, datas de entrega, entre outros.
 Também deve-se monitorar a evolução dos valores de cobertura e verificar código não testado para entender se é relevante
@@ -211,8 +214,8 @@ A ferramenta também oferece métricas como cobertura de testes, complexidade ci
 É uma plataforma web robusta, com suporte multilíngue, integração com diversas ferramentas de desenvolvimento e versionamento como GitHub, Jenkins e GitLab,
 com capacidade de personalização das regras de análise~\cite{sonarqube}.
 
-Utilizamos a plataforma para gerar um relatório completo do repositório \textit{interface-web} do AgroMart; com ele, podemos explorar as métricas do repositório de forma visual e quantitativa,
-observando quais estão positivas e negativas. Assim podemos entender onde se encontram os problemas do projeto e definirmos em qual focar.
+A plataforma foi utilizada para gerar um relatório completo do repositório \textit{interface-web} do AgroMart; com ele, é possível explorar as métricas do repositório de forma visual e quantitativa,
+observando quais estão positivas e negativas. Assim, é possível entender onde se encontram os problemas do projeto e definir em quais focar.
 
 
 \subsection{Relação entre o SonarQube e a ISO/IEC 25010}
