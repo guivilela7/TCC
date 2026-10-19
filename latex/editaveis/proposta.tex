@@ -3,7 +3,7 @@
 Este capítulo apresenta a proposta de melhoria para o repositório \textit{interface-web} do AgroMart,
 elaborada a partir dos resultados da análise estática do repositório realizada com a ferramenta SonarQube.
 O objetivo é definir ações para elevar a qualidade interna do código, com foco em prevenção de falhas e ampliação consistente da cobertura de testes.
-A proposta adota uma abordagem orientada por diagnóstico, iniciando com análise global do projeto no SonarQube para definição da linha de base das métricas.
+A proposta adota uma abordagem orientada por diagnóstico, iniciando com análise a global do projeto no SonarQube para definição da linha de base das métricas.
 Com esse diagnóstico, as intervenções passam a priorizar unidades fundamentais da aplicação, buscando ampliar a cobertura de forma progressiva e mensurável até um nível mínimo considerado adequado para apoiar manutenção e evolução.
 
 %Qual a proposta? Como se forma? O que ela fala?
@@ -56,7 +56,7 @@ Com essa ordem, a proposta busca aumentar a cobertura de forma sustentável em t
 \label{sec:criterios-priorizacao}
 
 A ordem de implementação dos testes parte dos dados de cobertura extraídos do SonarQube para cada arquivo do repositório, na linha de base coletada em 15 de outubro de 2026.
-Para cada arquivo, considerou-se a soma de linhas e condições não cobertas por testes, já que são esses os dois elementos que compõem a métrica de cobertura calculada pela ferramenta (Equação~\ref{eq:coverageSonar}).
+Para cada arquivo, considerou-se a soma de linhas e condições não cobertas por testes, já que esses dois são os elementos que compõem a métrica de cobertura calculada pela ferramenta (Equação~\ref{eq:coverageSonar}).
 
 Ordenar os arquivos apenas por essa soma, no entanto, colocaria no início da fila as páginas da aplicação, que concentram a maior quantidade de código não coberto, mas também são as unidades mais custosas de testar, por dependerem ao mesmo tempo do gerenciamento de estado, das rotas e da comunicação com a API.
 Por isso, os arquivos foram organizados em três grupos, de acordo com sua camada na arquitetura da aplicação, e serão testados nesta ordem:
